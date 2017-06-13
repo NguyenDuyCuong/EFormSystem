@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFS.Common\EFS.Common.csproj" />
+    <ProjectReference Include="..\EFS.DataAccess\EFS.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

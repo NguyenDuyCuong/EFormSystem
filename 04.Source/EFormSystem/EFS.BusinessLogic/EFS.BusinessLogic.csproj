@@ -9,4 +9,8 @@
     <ProjectReference Include="..\EFS.DataAccess\EFS.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Workflow\" />
+  </ItemGroup>
+
 </Project>

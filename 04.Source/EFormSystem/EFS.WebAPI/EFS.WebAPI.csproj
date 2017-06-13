@@ -8,6 +8,7 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.0.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
@@ -19,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EFS.APIModel\EFS.APIModel.csproj" />
     <ProjectReference Include="..\EFS.BusinessLogic\EFS.BusinessLogic.csproj" />
+    <ProjectReference Include="..\EFS.Model\EFS.Model.csproj" />
   </ItemGroup>
 
 </Project>

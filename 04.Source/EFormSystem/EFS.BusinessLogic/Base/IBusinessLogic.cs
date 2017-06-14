@@ -1,26 +1,44 @@
-﻿using System;
+﻿using EFS.Model.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EFS.BusinessLogic.Base
 {
-    public interface IBusinessLogic<T> where T : class
+    /// <summary>
+    /// The BusinessLogic interface.
+    /// </summary>
+    /// <typeparam name="T">
+    /// A domain entity.
+    /// </typeparam>
+    public interface IBusinessLogic<T> where T : EntityBase
     {
         /// <summary>
-        /// Adds the specified item.
+        /// Finds an entity by id.
         /// </summary>
-        /// <param name="item">
-        /// The item.
+        /// <param name="id">
+        /// The id.
         /// </param>
-        void Add(T item);
+        /// <returns>
+        /// The <see cref="T"/>.
+        /// </returns>
+        T FindById(Guid id);
 
         /// <summary>
-        /// Removes the specified item.
+        /// Finds all entities.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IEnumerable"/>.
+        /// </returns>
+        IEnumerable<T> FindAll();
+
+        /// <summary>
+        /// The insert.
         /// </summary>
         /// <param name="item">
         /// The item.
         /// </param>
-        void Remove(T item);
+        void Insert(T item);
 
         /// <summary>
         /// The update.
@@ -31,10 +49,10 @@ namespace EFS.BusinessLogic.Base
         void Update(T item);
 
         /// <summary>
-        /// Deletes the record by the ID
+        /// The delete.
         /// </summary>
         /// <param name="id">
-        /// The unique ID
+        /// The id.
         /// </param>
         void Delete(Guid id);
     }

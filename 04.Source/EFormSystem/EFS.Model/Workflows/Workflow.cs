@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EFS.Model.Workflow
+namespace EFS.Model.Workflows
 {
     public class Workflow : Base.EntityBase, Base.IAggregateRoot
     {

@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\EFS.APIModel\EFS.APIModel.csproj" />
     <ProjectReference Include="..\EFS.BusinessLogic\EFS.BusinessLogic.csproj" />
-    <ProjectReference Include="..\EFS.Model\EFS.Model.csproj" />
   </ItemGroup>
 
 </Project>

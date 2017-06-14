@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Workflow\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EFS.Model\EFS.Model.csproj" />
   </ItemGroup>
 

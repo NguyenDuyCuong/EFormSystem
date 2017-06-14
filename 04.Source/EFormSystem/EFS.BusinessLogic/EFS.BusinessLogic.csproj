@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EFS.APIModel\EFS.APIModel.csproj" />
     <ProjectReference Include="..\EFS.Common\EFS.Common.csproj" />
     <ProjectReference Include="..\EFS.DataAccess\EFS.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Workflow\" />
+    <ProjectReference Include="..\EFS.Model\EFS.Model.csproj" />
   </ItemGroup>
 
 </Project>

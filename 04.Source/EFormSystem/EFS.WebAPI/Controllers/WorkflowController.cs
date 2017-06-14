@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using EFS.APIModel;
-using EFS.Model.Workflow;
+using EFS.APIModel.Workflows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +9,13 @@ namespace EFS.WebAPI.Controllers
 {
     public class WorkflowController : BaseController
     {
-        /// <summary>
-        /// The _mapper.
-        /// </summary>
-        private readonly IMapper _mapper;
-
-        public WorkflowController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
         public IEnumerable<WorkflowItem> Get()
         {
-            var wfs = new List<Workflow>();
-            wfs.Add(new Workflow() { ID = Guid.NewGuid(), Name = "asdf" } );
-            wfs.Add(new Workflow() { ID = Guid.NewGuid(), Name = "lkjkj" });
+            var wfs = new List<WorkflowItem>();
+            wfs.Add(new WorkflowItem() { ID = Guid.NewGuid(), Name = "asdf" } );
+            wfs.Add(new WorkflowItem() { ID = Guid.NewGuid(), Name = "lkjkj" });
 
-            return _mapper.Map<IEnumerable<Workflow>, IEnumerable<WorkflowItem>>(wfs);
+            return wfs;
         }
     }
 }

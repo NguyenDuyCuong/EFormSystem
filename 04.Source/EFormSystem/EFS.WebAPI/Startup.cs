@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using EFS.Common.Encryption;
+using EFS.BusinessLogic.Users;
 
 namespace EFS.WebAPI
 {
@@ -29,6 +31,9 @@ namespace EFS.WebAPI
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddSingleton<IEncryptionService, EncryptionService>();
+            services.AddScoped<IUserBL>((sp) => new UserBL(Configuration.GetConnectionString("EFSDatabaseContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

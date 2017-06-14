@@ -6,7 +6,7 @@ namespace BB.SmsQuiz.Api.Mapping
     /// <summary>
     /// The mapper service using AutoMapper
     /// </summary>
-    public class AutoMapperService : IMapper
+    public class AutoMapperService : SmsQuiz.Infrastructure.Mapping.IMapper
     {
         /// <summary>
         /// Maps the specified domain.

@@ -5,22 +5,23 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 
-namespace EFS.DataAccess
+namespace EFS.BusinessLogic.Base
 {
     /// <summary>
-    /// The abstract data mapper.
+    /// The abstract Business Logic.
     /// </summary>
     /// <typeparam name="T">
     /// The data entity.
     /// </typeparam>
-    public abstract class AbstractDataMapper<T>
+    public abstract class AbstractBusinessLogic<T>
     {
         /// <summary>
         /// Gets the table name.
         /// </summary>
         protected abstract string TableName { get; }
-        private readonly IConfigurationRoot config;
+        protected string ConnectionString { get; set; }
 
         /// <summary>
         /// Gets the connection.
@@ -30,8 +31,7 @@ namespace EFS.DataAccess
             get
             {
                 return
-                    new SqlConnection(
-                        config.GetConnectionString("EFSDatabaseContext"));
+                    new SqlConnection(ConnectionString);
             }
         }
 

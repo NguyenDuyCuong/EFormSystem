@@ -1,6 +1,8 @@
 ﻿using EFS.APIModel.Authentication;
 using EFS.BusinessLogic.Users;
 using EFS.Common.Encryption;
+using EFS.WebAPI.Filters;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace EFS.WebAPI.Controllers
 {
+    [UnhandledException]
     public class AuthenticationController : BaseController
     {
         /// <summary>
@@ -47,20 +50,21 @@ namespace EFS.WebAPI.Controllers
         /// <returns>
         /// The <see cref="HttpResponseMessage"/>.
         /// </returns>
-        //public RequestResult Post(PostAuthentication item)
-        //{
+        [HttpPost]
+        public IActionResult Post(AuthenticationItem item)
+        {
+            var user = _userBL.FindByUsername(item.Username);
 
-        //    var user = _userDataMapper.FindByUsername(item.Username);
+            if (user != null)
+            {
+                if (user.Password.EncryptedValue.SequenceEqual(_encryptionService.Encrypt(item.Password)))
+                {
+                    item.Token = TokenAuthentication.Token;
+                    return Json(item);
+                }
+            }
 
-        //    if (user != null)
-        //    {
-        //        if (user.Password.EncryptedValue.SequenceEqual(_encryptionService.Encrypt(item.Password)))
-        //        {
-        //            return Request.CreateResponse(HttpStatusCode.OK, TokenAuthentication.Token);
-        //        }
-        //    }
-
-        //    return BadRequest();
-        //}
+            return Json(null);
+        }
     }
 }

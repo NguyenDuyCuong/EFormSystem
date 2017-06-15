@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EFS.APIModel\EFS.APIModel.csproj" />
     <ProjectReference Include="..\EFS.Common\EFS.Common.csproj" />
     <ProjectReference Include="..\EFS.DataAccess\EFS.DataAccess.csproj" />
     <ProjectReference Include="..\EFS.Model\EFS.Model.csproj" />

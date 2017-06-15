@@ -18,5 +18,7 @@ namespace EFS.APIModel.Authentication
         /// Gets or sets the password.
         /// </summary>
         public string Password { get; set; }
+
+        public string Token { get; set; }
     }
 }

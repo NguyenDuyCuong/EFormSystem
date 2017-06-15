@@ -7,6 +7,7 @@ using System.Data;
 using Dapper;
 using EFS.Common.Encryption;
 using System.Linq;
+using EFS.APIModel.Users;
 
 namespace EFS.BusinessLogic.Users
 {

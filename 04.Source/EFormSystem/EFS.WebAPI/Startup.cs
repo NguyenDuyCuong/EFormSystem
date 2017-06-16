@@ -32,8 +32,9 @@ namespace EFS.WebAPI
             // Add framework services.
             services.AddMvc();
 
+            // TODO: global settings
             services.AddSingleton<IEncryptionService, EncryptionService>();
-            services.AddScoped<IUserBL>((sp) => new UserBL(Configuration.GetConnectionString("EFSDatabaseContext")));
+            //services.AddScoped<IUserBL>((sp) => new UserBL(Configuration.GetConnectionString("EFSDatabaseContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

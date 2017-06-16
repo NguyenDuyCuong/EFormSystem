@@ -1,10 +1,11 @@
-﻿using System;
+﻿using EFS.APIModel.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EFS.APIModel.Users
 {
-    public class UserItem
+    public class UserItem : ModelItem
     {
         /// <summary>
         /// Gets or sets the ID.

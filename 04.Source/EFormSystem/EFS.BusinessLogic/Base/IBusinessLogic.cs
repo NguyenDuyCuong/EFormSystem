@@ -1,4 +1,5 @@
-﻿using EFS.Model.Base;
+﻿using EFS.APIModel.Base;
+using EFS.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,49 +12,8 @@ namespace EFS.BusinessLogic.Base
     /// <typeparam name="T">
     /// A domain entity.
     /// </typeparam>
-    public interface IBusinessLogic<T> where T : EntityBase
+    public interface IBusinessLogic<T> where T : ModelItem
     {
-        /// <summary>
-        /// Finds an entity by id.
-        /// </summary>
-        /// <param name="id">
-        /// The id.
-        /// </param>
-        /// <returns>
-        /// The <see cref="T"/>.
-        /// </returns>
-        T FindById(Guid id);
 
-        /// <summary>
-        /// Finds all entities.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IEnumerable"/>.
-        /// </returns>
-        IEnumerable<T> FindAll();
-
-        /// <summary>
-        /// The insert.
-        /// </summary>
-        /// <param name="item">
-        /// The item.
-        /// </param>
-        void Insert(T item);
-
-        /// <summary>
-        /// The update.
-        /// </summary>
-        /// <param name="item">
-        /// The item.
-        /// </param>
-        void Update(T item);
-
-        /// <summary>
-        /// The delete.
-        /// </summary>
-        /// <param name="id">
-        /// The id.
-        /// </param>
-        void Delete(Guid id);
     }
 }

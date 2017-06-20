@@ -50,21 +50,21 @@ namespace EFS.WebAPI.Controllers
         /// <returns>
         /// The <see cref="HttpResponseMessage"/>.
         /// </returns>
-        //[HttpPost]
-        //public IActionResult Post(AuthenticationItem item)
-        //{
-        //    var user = _userBL.FindByUsername(item.Username);
+        [HttpPost]
+        public IActionResult Post(AuthenticationItem item)
+        {
+            //var user = _userBL.FindByUsername(item.Username);
 
-        //    if (user != null)
-        //    {
-        //        if (user.Password.EncryptedValue.SequenceEqual(_encryptionService.Encrypt(item.Password)))
-        //        {
-        //            item.Token = TokenAuthentication.Token;
-        //            return Json(item);
-        //        }
-        //    }
+            //if (user != null)
+            //{
+            //    if (user.Password.EncryptedValue.SequenceEqual(_encryptionService.Encrypt(item.Password)))
+            //    {
+            //        item.Token = TokenAuthentication.Token;
+            //        return Json(item);
+            //    }
+            //}
 
-        //    return Json(null);
-        //}
+            return Json(null);
+        }
     }
 }

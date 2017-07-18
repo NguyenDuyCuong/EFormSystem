@@ -51,7 +51,7 @@ namespace EFS.WebAPI.Controllers
         /// The <see cref="HttpResponseMessage"/>.
         /// </returns>
         [HttpPost]
-        public IActionResult Post(AuthenticationItem item)
+        public IActionResult Post([FromBody]AuthenticationItem item)
         {
             //var user = _userBL.FindByUsername(item.Username);
 
@@ -63,8 +63,8 @@ namespace EFS.WebAPI.Controllers
             //        return Json(item);
             //    }
             //}
-
-            return Json(null);
+            item.Token = "asdf";
+            return Json(item);
         }
     }
 }

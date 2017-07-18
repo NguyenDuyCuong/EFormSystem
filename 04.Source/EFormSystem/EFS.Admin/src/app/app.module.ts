@@ -2,6 +2,7 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClientXsrfModule }        from '@angular/common/http';
 
 import { Router } from '@angular/router';
 
@@ -16,6 +17,11 @@ import { PageNotFoundComponent }   from './not-found.component';
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'My-Xsrf-Cookie',
+      headerName: 'My-Xsrf-Header',
+    }),
     FormsModule,
     LoginRoutingModule,
     AppRoutingModule,

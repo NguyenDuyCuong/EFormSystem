@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using EFS.Common.Encryption;
 using EFS.BusinessLogic.Users;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace EFS.WebAPI
 {
@@ -31,6 +33,14 @@ namespace EFS.WebAPI
         {
             // Add framework services.
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             // TODO: global settings
             services.AddSingleton<IEncryptionService, EncryptionService>();
@@ -42,6 +52,8 @@ namespace EFS.WebAPI
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseCors("CorsPolicy");
 
             app.UseMvc(routes =>
             {

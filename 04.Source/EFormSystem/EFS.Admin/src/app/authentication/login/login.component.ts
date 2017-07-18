@@ -22,7 +22,8 @@ export class LoginComponent {
   login() {
     this.message = 'Trying to log in ...';
 
-    this.authService.login().subscribe(() => {
+    this.authService.login().subscribe(o => {
+      console.log(o);
       this.setMessage();
       if (this.authService.isLoggedIn) {
         // Get the redirect URL from our auth service

@@ -13,6 +13,7 @@ import { LoginRoutingModule }      from './authentication/login/login-routing.mo
 import { LoginComponent }          from './authentication/login/login.component';
 import { PageNotFoundComponent }   from './not-found.component';
 
+import { DashboardModule } from './dashboard/dashboard.module'
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { PageNotFoundComponent }   from './not-found.component';
       headerName: 'My-Xsrf-Header',
     }),
     FormsModule,
+    DashboardModule,
     LoginRoutingModule,
     AppRoutingModule,
     BrowserAnimationsModule
@@ -30,15 +32,10 @@ import { PageNotFoundComponent }   from './not-found.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   providers: [
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {
-  // Diagnostic only: inspect router configuration
-  constructor(router: Router) {
-    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
-  }
-}
+export class AppModule {}

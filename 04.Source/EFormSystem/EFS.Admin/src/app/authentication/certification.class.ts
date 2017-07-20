@@ -11,8 +11,4 @@ export class Certification {
     constructor( ){ 
         this.createdDate = Date.now();
     };
-
-    get IsLogin() {
-        return this.status == AuthStatus.Login;
-    }
 }

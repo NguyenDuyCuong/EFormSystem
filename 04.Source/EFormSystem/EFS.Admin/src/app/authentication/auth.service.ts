@@ -17,9 +17,7 @@ export class AuthService {
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
-  constructor(private http: HttpClient) {
-    this.authInfo = new Certification();
-  }
+  constructor(private http: HttpClient) { }
 
   login(): Observable<any> {
     let body = {"username": "cuongnd","password": "12345"};
@@ -43,13 +41,31 @@ export class AuthService {
     this.authInfo.token = '';
   }
 
+  get IsLogin() {
+    return this.authInfo != null && this.authInfo.status == AuthStatus.Login;
+  }
+
   Vertify(): boolean {
-    if (this.authInfo == null || this.authInfo.status !== AuthStatus.Login)
+    if (this.authInfo == null) {      
+      var authData = localStorage.getItem('AuthInfo');
+      if (authData == null) {
+          return false;
+      }
+      else {
+        this.authInfo = JSON.parse(authData);
+      }
+    }    
+
+    if (this.authInfo == null || this.authInfo.status !== AuthStatus.Login || this.authInfo.token === '')
       return false;
 
-    if(this.authInfo.token === '')
-      return false;
 
-    return true;
+    if(this.authInfo.status == AuthStatus.Login){
+      var today = new Date();
+      if(today.getHours() - this.authInfo.loginDate.getHours() <= 24)
+        return true;
+    }
+
+    return false;
   }
 }

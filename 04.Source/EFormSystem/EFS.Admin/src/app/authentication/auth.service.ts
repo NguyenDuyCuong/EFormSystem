@@ -6,7 +6,10 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
-import { AuthStatus } from '../sys/app-enums'
+import * as util from 'util';
+
+import { AuthStatus } from '../sys/app-enums';
+import { AppConstants } from '../sys/app-constants';
 
 import { Certification } from './certification.class';
 
@@ -19,9 +22,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(): Observable<any> {
-    let body = {"username": "cuongnd","password": "12345"};
-    return this.http.post<any>('http://localhost:50266/api/Authentication', JSON.stringify(body), {
+  login(username:string, password:string): Observable<any> {
+    this.authInfo = new Certification(username, password);
+    var body = util.inspect(this.authInfo);
+    return this.http.post<any>(AppConstants.ROOT_URI + '/Authentication', body, {
       headers: new HttpHeaders().set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8'),
     });
 

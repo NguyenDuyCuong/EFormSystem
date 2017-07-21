@@ -14,7 +14,7 @@ export class LoginComponent {
   constructor(public authService: AuthService, public router: Router) {}
 
   login() {
-    this.authService.login().subscribe(o => {
+    this.authService.login(this.username, this.password).subscribe(o => {
       // if (this.authService.isLoggedIn) {
       //   // Get the redirect URL from our auth service
       //   // If no redirect has been set, use the default

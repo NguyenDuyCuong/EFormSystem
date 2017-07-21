@@ -18,8 +18,12 @@ namespace EFS.APIModel.Authentication
         /// <summary>
         /// Gets or sets the password.
         /// </summary>
-        public string Password { get; set; }
+        public string EncryptedPass { get; set; }
 
         public string Token { get; set; }
+
+        public DateTime LoginDate { get; set; }
+
+        public int Status { get; set; }
     }
 }

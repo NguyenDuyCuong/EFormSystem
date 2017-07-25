@@ -63,6 +63,9 @@ namespace EFS.WebAPI.Controllers
             //        return Json(item);
             //    }
             //}
+            if (!ModelState.IsValid)
+                return BadRequest();            
+
             item.Token = "asdf";
             return Json(item);
         }

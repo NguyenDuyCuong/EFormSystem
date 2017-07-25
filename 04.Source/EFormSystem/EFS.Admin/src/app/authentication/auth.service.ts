@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -7,9 +7,10 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
 import * as util from 'util';
+import { Helper } from '../shared/sys/app-helper';
 
-import { AuthStatus } from '../sys/app-enums';
-import { AppConstants } from '../sys/app-constants';
+import { AuthStatus } from '../shared/sys/app-enums';
+import { AppConstants } from '../shared/sys/app-constants';
 
 import { Certification } from './certification.class';
 
@@ -19,25 +20,16 @@ export class AuthService {
   
   // store the URL so we can redirect after logging in
   redirectUrl: string;
+  urlAPI: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.urlAPI = AppConstants.ROOT_URI + '/Authentication';
+  }
 
   login(username:string, password:string): Observable<any> {
     this.authInfo = new Certification(username, password);
     var body = util.inspect(this.authInfo);
-    return this.http.post<any>(AppConstants.ROOT_URI + '/Authentication', body, {
-      headers: new HttpHeaders().set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8'),
-    });
-
-    // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
-    //         .map((response: Response) => {
-    //             // login successful if there's a jwt token in the response
-    //             let user = response.json();
-    //             if (user && user.token) {
-    //                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //                 localStorage.setItem('currentUser', JSON.stringify(user));
-    //             }
-    //         });
+    return Helper.InvokeAPI(this.urlAPI, 'post', body, this.http);
   }
 
   logout(): void {

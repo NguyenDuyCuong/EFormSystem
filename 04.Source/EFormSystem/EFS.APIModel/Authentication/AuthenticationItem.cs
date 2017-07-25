@@ -1,6 +1,7 @@
 ﻿using EFS.APIModel.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace EFS.APIModel.Authentication
@@ -10,14 +11,10 @@ namespace EFS.APIModel.Authentication
     /// </summary>
     public class AuthenticationItem : ModelItem
     {
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
+        [Required]
         public string Username { get; set; }
 
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
+        [Required]
         public string EncryptedPass { get; set; }
 
         public string Token { get; set; }

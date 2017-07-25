@@ -1,4 +1,4 @@
-import {Helper} from '../sys/app-helper';
+import {Helper} from '../shared/sys/app-helper';
 
 export class Certification {
     username: string;

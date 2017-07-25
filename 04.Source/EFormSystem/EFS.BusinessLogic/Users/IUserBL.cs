@@ -9,6 +9,7 @@ namespace EFS.BusinessLogic.Users
 {
     public interface IUserBL : IBusinessLogic<UserItem>
     {
-       
+        User FindByUsername(string username);
+        User FindByAuthToken(string authenticationToken);
     }
 }

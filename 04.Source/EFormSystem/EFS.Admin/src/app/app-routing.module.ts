@@ -13,7 +13,7 @@ const appRoutes: Routes = [
   //   loadChildren: 'app/dashboard/dashboard.module#DashboardModule',
   //   canLoad: [AuthGuard]
   // },
-  { path: '',   redirectTo: '/dashboad', pathMatch: 'full', canActivate: [AuthGuard], },
+  { path: '',   redirectTo: '/dashboard', pathMatch: 'full', },
   { path: '**', component: PageNotFoundComponent }
 ];
 

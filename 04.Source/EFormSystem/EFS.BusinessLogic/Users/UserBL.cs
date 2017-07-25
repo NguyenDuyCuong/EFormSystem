@@ -13,6 +13,14 @@ namespace EFS.BusinessLogic.Users
 {
     public class UserBL : AbstractBusinessLogic<UserItem>, IUserBL
     {
-       
+        public User FindByAuthToken(string authenticationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User FindByUsername(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

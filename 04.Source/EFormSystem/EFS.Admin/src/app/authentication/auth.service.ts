@@ -46,6 +46,8 @@ export class AuthService {
   logout(): void {
     this.authInfo.status = AuthStatus.Logout; 
     this.authInfo.token = '';
+
+    localStorage.setItem('AuthInfo', JSON.stringify(this.authInfo));
   }
 
   get IsLogin() {

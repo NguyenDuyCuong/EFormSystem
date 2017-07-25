@@ -53,24 +53,19 @@ namespace EFS.WebAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]AuthenticationItem item)
         {
-            //var user = _userBL.FindByUsername(item.Username);
-
-            //if (user != null)
-            //{
-            //    if (user.Password.EncryptedValue.SequenceEqual(_encryptionService.Encrypt(item.Password)))
-            //    {
-            //        item.Token = TokenAuthentication.Token;
-            //        return Json(item);
-            //    }
-            //}
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (item.Username == "cuongnd")
+            var user = _userBL.FindByUsername(item.Username);
+
+            if (user != null)
             {
-                item.Status = (int)Shared.AppEnums.AuthStatus.Login;
-                item.Token = "adsf";
-                item.LoginDate = DateTime.Now;
+                if (user.Password == item.EncryptedPass)
+                {
+                    item.Token = TokenAuthentication.Token;
+                    item.Status = (int)Shared.AppEnums.AuthStatus.Login;
+                    item.LoginDate = DateTime.Now;
+                }
             }
             else
             {

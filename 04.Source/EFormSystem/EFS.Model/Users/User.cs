@@ -34,7 +34,9 @@ namespace EFS.Model.Users
         /// <value>
         /// The password.
         /// </value>
-        public EncryptedString Password { get; set; }
+        public EncryptedString EncryptedPassword { get; set; }
+
+        public string Password { get; set; }
 
         /// <summary>
         /// Validates this instance.

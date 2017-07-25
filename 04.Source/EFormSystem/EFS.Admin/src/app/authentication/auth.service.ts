@@ -26,10 +26,21 @@ export class AuthService {
     this.urlAPI = AppConstants.ROOT_URI + '/Authentication';
   }
 
-  login(username:string, password:string): Observable<any> {
-    this.authInfo = new Certification(username, password);
-    var body = util.inspect(this.authInfo);
-    return Helper.InvokeAPI(this.urlAPI, 'post', body, this.http);
+  login(username:string, password:string, successCallback, failCallback): Observable<any> {
+    this.authInfo = new Certification({username: username, password: password});
+    var body = JSON.stringify(this.authInfo);
+    return Helper.InvokeAPIFull(this.urlAPI, 'post', body, this.http)
+      .subscribe(resp => {
+        if (resp.body){          
+          this.authInfo = new Certification(resp.body);
+          localStorage.setItem('AuthInfo', JSON.stringify(this.authInfo));
+
+          successCallback(this.authInfo);
+        }
+      },
+      error => {
+        failCallback(error);
+      });
   }
 
   logout(): void {
@@ -48,7 +59,7 @@ export class AuthService {
           return false;
       }
       else {
-        this.authInfo = JSON.parse(authData);
+        this.authInfo = new Certification(JSON.parse(authData));
       }
     }    
 

@@ -64,9 +64,20 @@ namespace EFS.WebAPI.Controllers
             //    }
             //}
             if (!ModelState.IsValid)
-                return BadRequest();            
+                return BadRequest();
 
-            item.Token = "asdf";
+            if (item.Username == "cuongnd")
+            {
+                item.Status = (int)Shared.AppEnums.AuthStatus.Login;
+                item.Token = "adsf";
+                item.LoginDate = DateTime.Now;
+            }
+            else
+            {
+                item.Status = (int)Shared.AppEnums.AuthStatus.Fail;
+                return NotFound(item);
+            }
+
             return Json(item);
         }
     }

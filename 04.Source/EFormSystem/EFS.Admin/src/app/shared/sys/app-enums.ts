@@ -1,5 +1,6 @@
 export enum AuthStatus{
-    UnAuth = 0,
-    Login = 1,
-    Logout = 2,    
+    UnAuth = 1,
+        Login = 2,
+        Logout = 4,
+        Fail = 8,
 }

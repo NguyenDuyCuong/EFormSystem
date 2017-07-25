@@ -31,4 +31,21 @@ export class Helper{
             params: params,
         });
     }
+
+    static InvokeAPIFull(url: string, method: any, body: any, http: HttpClient, authToken = '', ...args){
+        var headers = new HttpHeaders().set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8');
+        if (authToken)
+            headers.set('Authorization', authToken)
+        var params = new HttpParams();
+        args.forEach(arg => {
+            if (arg.key)
+                params.set(arg.key, arg.value);
+        });
+       
+        return http[method](url, body, {
+            headers: headers,
+            params: params,
+            observe: 'response',
+        });
+    }
 }

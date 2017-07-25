@@ -8,9 +8,17 @@ export class Certification {
     status = 0;
     private createdDate = 0;
 
-    constructor( username: string, password:string ){ 
-        this.username = username;
-        this.encryptedPass = Helper.Encrypt(password, username);
+    constructor( data: any ){ 
+        this.username = data.username;
+        this.encryptedPass = Helper.Encrypt(data.encryptedPass, data.username);
+        if (data.token)
+            this.token = data.token;
+        if (data.loginDate){
+            this.loginDate = new Date(data.loginDate);
+        }
+        if (data.status)
+            this.status = data.status;        
+
         this.createdDate = Date.now();
     };
 }

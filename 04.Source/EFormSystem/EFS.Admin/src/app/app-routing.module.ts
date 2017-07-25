@@ -13,12 +13,7 @@ const appRoutes: Routes = [
   //   loadChildren: 'app/dashboard/dashboard.module#DashboardModule',
   //   canLoad: [AuthGuard]
   // },
-//   {
-//     path: 'crisis-center',
-//     loadChildren: 'app/crisis-center/crisis-center.module#CrisisCenterModule',
-//     data: { preload: true }
-//   },
-  { path: '',   redirectTo: '/dashboad', pathMatch: 'full' },
+  { path: '',   redirectTo: '/dashboad', pathMatch: 'full', canActivate: [AuthGuard], },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,8 +1,10 @@
 <h2>Login form</h2>
-<div>
+<p *ngIf="message">{{message}}</p>
+<div *ngIf="!IsLogin">
   <input type="text" placeholder="Name" [(ngModel)]="username" />
   <input type="password" placeholder="Password" [(ngModel)]="password" />
 </div>
 <p>
-  <button (click)="login()">Login</button>
+  <button (click)="login()" *ngIf="!IsLogin">Login</button>
+  <button (click)="logout()" *ngIf="IsLogin">Logout</button>
 </p>

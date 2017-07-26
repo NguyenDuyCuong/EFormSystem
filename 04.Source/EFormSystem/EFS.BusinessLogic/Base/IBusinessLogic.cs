@@ -14,6 +14,6 @@ namespace EFS.BusinessLogic.Base
     /// </typeparam>
     public interface IBusinessLogic<T> where T : ModelItem
     {
-
+        
     }
 }

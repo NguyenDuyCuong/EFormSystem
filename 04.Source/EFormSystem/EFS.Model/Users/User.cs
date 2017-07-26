@@ -48,7 +48,7 @@ namespace EFS.Model.Users
                 ValidationErrors.Add("Username");
             }
 
-            if (Password == null || !Password.EncryptedValue.Any())
+            if (Password == null || !EncryptedPassword.EncryptedValue.Any())
             {
                 ValidationErrors.Add("Password");
             }

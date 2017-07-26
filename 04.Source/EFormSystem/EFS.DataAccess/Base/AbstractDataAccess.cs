@@ -14,7 +14,7 @@ namespace EFS.DataAccess.Base
     /// <typeparam name="T">
     /// The data entity.
     /// </typeparam>
-    public abstract class AbstractDataMapper<T>
+    public abstract class AbstractDataAccess<T>
     {
         /// <summary>
         /// Gets the table name.

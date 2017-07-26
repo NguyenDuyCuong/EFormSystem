@@ -8,11 +8,14 @@ using Dapper;
 using EFS.Common.Encryption;
 using System.Linq;
 using EFS.APIModel.Users;
+using EFS.DataAccess.Users;
 
 namespace EFS.BusinessLogic.Users
 {
     public class UserBL : AbstractBusinessLogic<UserItem>, IUserBL
     {
+        public IUserDataAccess DataLayer { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public User FindByAuthToken(string authenticationToken)
         {
             throw new NotImplementedException();

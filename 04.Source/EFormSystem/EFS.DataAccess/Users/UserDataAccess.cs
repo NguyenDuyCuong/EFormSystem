@@ -13,7 +13,7 @@ namespace EFS.DataAccess.Users
     /// <summary>
     /// The user mapper.
     /// </summary>
-    public class UserDataMapper : AbstractDataMapper<User>, IUserDataMapper
+    public class UserDataAccess : AbstractDataAccess<User>, IUserDataAccess
     {
         /// <summary>
         /// Gets the table name.
@@ -80,7 +80,7 @@ namespace EFS.DataAccess.Users
                 item.ID =
                     cn.Query<Guid>(
                         "INSERT INTO Users (Username, Password) OUTPUT inserted.ID VALUES (@Username, @Password)",
-                        new { item.Username, Password = item.Password.EncryptedValue }).First();
+                        new { item.Username, Password = item.EncryptedPassword.EncryptedValue }).First();
             }
         }
 
@@ -97,7 +97,7 @@ namespace EFS.DataAccess.Users
                 cn.Open();
                 cn.Execute(
                     "UPDATE Users SET UserName=@UserName, Password=@Password WHERE ID=@ID",
-                    new { item.ID, item.Username, Password = item.Password.EncryptedValue });
+                    new { item.ID, item.Username, Password = item.EncryptedPassword.EncryptedValue });
             }
         }
 
@@ -116,7 +116,7 @@ namespace EFS.DataAccess.Users
             {
                 ID = result.ID,
                 Username = result.Username,
-                Password = new EncryptedString(result.Password)
+                Password = result.Password
             };
 
             return item;

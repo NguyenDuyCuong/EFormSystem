@@ -11,7 +11,7 @@ namespace EFS.DataAccess.Base
     /// <typeparam name="T">
     /// A domain entity.
     /// </typeparam>
-    public interface IDataMapper<T> where T : EntityBase
+    public interface IDataAccess<T> where T : EntityBase
     {
         /// <summary>
         /// Finds an entity by id.

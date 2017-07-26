@@ -9,7 +9,7 @@ namespace EFS.DataAccess.Users
     /// <summary>
     /// The UserDataMapper interface.
     /// </summary>
-    public interface IUserDataMapper : IDataMapper<User>
+    public interface IUserDataAccess : IDataAccess<User>
     {
         /// <summary>
         /// Find user by username.

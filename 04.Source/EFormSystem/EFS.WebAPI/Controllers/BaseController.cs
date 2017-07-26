@@ -1,4 +1,7 @@
-﻿using EFS.WebAPI.Authentication;
+﻿using EFS.APIModel.Base;
+using EFS.BusinessLogic.Base;
+using EFS.DataAccess.Base;
+using EFS.WebAPI.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

@@ -21,24 +21,8 @@ namespace EFS.WebAPI.Controllers
         /// The _encryption service.
         /// </summary>
         private readonly IEncryptionService _encryptionService;
-
-        /// <summary>
-        /// The _user data mapper.
-        /// </summary>
         private readonly IUserBL _userBL;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UsersController"/> class.
-        /// </summary>
-        /// <param name="userDataMapper">
-        /// The user repository.
-        /// </param>
-        /// <param name="mapper">
-        /// The mapper.
-        /// </param>
-        /// <param name="encryptionService">
-        /// The encryption service.
-        /// </param>
         public UsersController(
             IUserBL userBL,
             IEncryptionService encryptionService)

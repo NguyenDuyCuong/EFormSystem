@@ -16,11 +16,15 @@ namespace EFS.DataAccess.Base
     /// </typeparam>
     public abstract class AbstractDataAccess<T>
     {
+        public AbstractDataAccess(string connecString)
+        {
+            this.ConnectionString = connecString;
+        }
         /// <summary>
         /// Gets the table name.
         /// </summary>
         protected abstract string TableName { get; }
-        protected abstract string ConnectionString { get; }
+        protected abstract string ConnectionString { get; set; }
 
         /// <summary>
         /// Gets the connection.

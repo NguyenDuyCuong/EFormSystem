@@ -9,21 +9,40 @@ using EFS.Common.Encryption;
 using System.Linq;
 using EFS.APIModel.Users;
 using EFS.DataAccess.Users;
+using EFS.Common.Global;
+using AutoMapper;
 
 namespace EFS.BusinessLogic.Users
 {
-    public class UserBL : AbstractBusinessLogic<UserItem>, IUserBL
+    public class UserBL : BaseBusinessLogic<UserItem>, IUserBL
     {
-        public IUserDataAccess DataLayer { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public UserBL(AppConfigures configs) : base(configs)
+        {
+            _dataLayer = new UserDataAccess(_options.ConnectionString);
+        }
 
-        public User FindByAuthToken(string authenticationToken)
+        private IUserDataAccess _dataLayer;
+
+        public UserItem FindByAuthToken(string authenticationToken)
         {
             throw new NotImplementedException();
         }
 
-        public User FindByUsername(string username)
+        public UserItem FindByUsername(string username)
         {
-            throw new NotImplementedException();
+            var user = _dataLayer.FindByUsername(username);
+            return Mapper.Map<UserItem>(user);
+        }
+
+        protected override void RegisterMapper()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<User, UserItem>();
+                cfg.CreateMap<UserItem, User>();
+            });
+
+            base.RegisterMapper();
         }
     }
 }

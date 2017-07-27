@@ -8,11 +8,9 @@ using System.Text;
 
 namespace EFS.BusinessLogic.Users
 {
-    public interface IUserBL : IBusinessLogic<UserItem>
+    public interface IUserBL
     {
-        IUserDataAccess DataLayer { get; set; }
-
-        User FindByUsername(string username);
-        User FindByAuthToken(string authenticationToken);
+        UserItem FindByUsername(string username);
+        UserItem FindByAuthToken(string authenticationToken);
     }
 }

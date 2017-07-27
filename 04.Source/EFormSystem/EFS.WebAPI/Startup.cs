@@ -11,6 +11,8 @@ using EFS.Common.Encryption;
 using EFS.BusinessLogic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using EFS.WebAPI.Shared;
+using EFS.Common.Global;
 
 namespace EFS.WebAPI
 {
@@ -20,7 +22,7 @@ namespace EFS.WebAPI
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -31,6 +33,9 @@ namespace EFS.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<AppConfigures>(Configuration);
+
             // Add framework services.
             services.AddMvc();
             services.AddCors(options =>
@@ -41,10 +46,8 @@ namespace EFS.WebAPI
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
-
-            // TODO: global settings
+                        
             services.AddSingleton<IEncryptionService, EncryptionService>();
-            services.AddScoped<IUserBL>((sp) => new UserBL());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

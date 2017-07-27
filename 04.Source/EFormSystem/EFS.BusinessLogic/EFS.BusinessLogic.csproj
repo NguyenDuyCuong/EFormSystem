@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EFS.APIModel\EFS.APIModel.csproj" />
     <ProjectReference Include="..\EFS.Common\EFS.Common.csproj" />
     <ProjectReference Include="..\EFS.DataAccess\EFS.DataAccess.csproj" />

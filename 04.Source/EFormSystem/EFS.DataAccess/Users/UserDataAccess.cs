@@ -15,6 +15,10 @@ namespace EFS.DataAccess.Users
     /// </summary>
     public class UserDataAccess : AbstractDataAccess<User>, IUserDataAccess
     {
+        public UserDataAccess(string connecString) : base(connecString)
+        {
+        }
+
         /// <summary>
         /// Gets the table name.
         /// </summary>
@@ -23,7 +27,7 @@ namespace EFS.DataAccess.Users
             get { return "Users"; }
         }
 
-        protected override string ConnectionString { get => throw new NotImplementedException();  }
+        protected override string ConnectionString { get; set; }
 
         /// <summary>
         /// Find by username.

@@ -1,0 +1,63 @@
+﻿/*
+DROP PROCEDURE [Invoice_Insert]
+DROP TABLE InvoiceItem;
+DROP TABLE InvoiceDetail;
+DROP TABLE Invoice;
+*/
+
+CREATE TABLE [dbo].[Invoice](
+	[InvoiceID] [INT] IDENTITY(1,1) NOT NULL,
+	[Kind] [INT] NULL,
+	[Code] [VARCHAR](50) NOT NULL,
+ CONSTRAINT [PK_Invoice] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[InvoiceDetail](
+	[InvoiceID] [INT] NOT NULL,
+	[Detail] [VARCHAR](50) NULL,
+ CONSTRAINT [PK_InvoiceDetail] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[InvoiceItem](
+	[InvoiceItemID] [INT] IDENTITY(1,1) NOT NULL,
+	[InvoiceID] [INT] NULL,
+	[Code] [VARCHAR](50) NULL,
+ CONSTRAINT [PK_InvoiceItem] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceItemID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[InvoiceItem]  WITH CHECK ADD  CONSTRAINT [FK_InvoiceItem_Invoice] FOREIGN KEY([InvoiceID])
+REFERENCES [dbo].[Invoice] ([InvoiceID])
+GO
+
+ALTER TABLE [dbo].[InvoiceItem] CHECK CONSTRAINT [FK_InvoiceItem_Invoice]
+GO
+
+CREATE PROCEDURE [Invoice_Insert]
+    @Kind INT ,
+    @Code VARCHAR(50)
+AS
+    BEGIN
+
+        INSERT  INTO dbo.Invoice
+                ( Kind, Code )
+        VALUES  ( @Kind, @Code )
+
+		RETURN @@ROWCOUNT
+    END
+
+GO

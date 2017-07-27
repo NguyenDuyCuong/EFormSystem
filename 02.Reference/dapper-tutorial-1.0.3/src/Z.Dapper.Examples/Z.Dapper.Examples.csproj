@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{335C36F5-275F-479F-9816-4738177E504A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Z.Dapper.Examples</RootNamespace>
+    <AssemblyName>Z.Dapper.Examples</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.50.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.1.50.0\lib\net45\Dapper.Contrib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.1.1.1\lib\net451\Microsoft.EntityFrameworkCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.1.1.1\lib\net451\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.1.1.1\lib\net451\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.1.1.1\lib\net451\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.1.1.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.1.1.1\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.1.1\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.1.1.1\lib\netstandard1.0\Microsoft.Extensions.Options.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Interactive.Async, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.0.0\lib\net45\System.Interactive.Async.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.0\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Z.Dapper.Plus, Version=1.1.5.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.Dapper.Plus.1.1.5\lib\net45\Z.Dapper.Plus.dll</HintPath>
+    </Reference>
+    <Reference Include="Z.EntityFramework.Extensions, Version=3.12.9.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.EntityFramework.Extensions.3.12.9\lib\net45\Z.EntityFramework.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\DapperContrib\DataAnnotations\Computed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Computed.Designer.cs">
+      <DependentUpon>Computed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\ExplicitKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\ExplicitKey.Designer.cs">
+      <DependentUpon>ExplicitKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Key.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Key.Designer.cs">
+      <DependentUpon>Key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Table.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Table.Designer.cs">
+      <DependentUpon>Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Write.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\DataAnnotations\Write.Designer.cs">
+      <DependentUpon>Write.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Delete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Delete.Designer.cs">
+      <DependentUpon>Delete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\DeleteAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\DeleteAll.Designer.cs">
+      <DependentUpon>DeleteAll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Get.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Get.Designer.cs">
+      <DependentUpon>Get.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\GetAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\GetAll.Designer.cs">
+      <DependentUpon>GetAll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Insert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Insert.Designer.cs">
+      <DependentUpon>Insert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperContrib\Methods\Update.Designer.cs">
+      <DependentUpon>Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Delete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Delete.Designer.cs">
+      <DependentUpon>Bulk_Delete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Insert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Insert.Designer.cs">
+      <DependentUpon>Bulk_Insert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Merge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Merge.Designer.cs">
+      <DependentUpon>Bulk_Merge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\DapperPlus\Methods\Bulk_Update.Designer.cs">
+      <DependentUpon>Bulk_Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\Execute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\Execute.Designer.cs">
+      <DependentUpon>Execute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\Anonymous.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\Anonymous.Designer.cs">
+      <DependentUpon>Anonymous.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\Dynamic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\Dynamic.Designer.cs">
+      <DependentUpon>Dynamic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\List.Designer.cs">
+      <DependentUpon>List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\String.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Parameter\String.Designer.cs">
+      <DependentUpon>String.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\Query.Designer.cs">
+      <DependentUpon>Query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QueryFirst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QueryFirst.Designer.cs">
+      <DependentUpon>QueryFirst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QueryFirstOrDefault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QueryFirstOrDefault.Designer.cs">
+      <DependentUpon>QueryFirstOrDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QueryMultiple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QueryMultiple.Designer.cs">
+      <DependentUpon>QueryMultiple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QuerySingle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QuerySingle.Designer.cs">
+      <DependentUpon>QuerySingle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QuerySingleOrDefault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Methods\QuerySingleOrDefault.Designer.cs">
+      <DependentUpon>QuerySingleOrDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Anonymous.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Anonymous.Designer.cs">
+      <DependentUpon>Anonymous.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Multi_Mapping.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Multi_Mapping.Designer.cs">
+      <DependentUpon>Multi_Mapping.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Multi_Result.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Multi_Result.Designer.cs">
+      <DependentUpon>Multi_Result.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Multi_Type.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Multi_Type.Designer.cs">
+      <DependentUpon>Multi_Type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Strongly_Typed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Result\Strongly_Typed.Designer.cs">
+      <DependentUpon>Strongly_Typed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Async.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Async.Designer.cs">
+      <DependentUpon>Async.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Buffered.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Buffered.Designer.cs">
+      <DependentUpon>Buffered.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Stored_Procedure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Stored_Procedure.Designer.cs">
+      <DependentUpon>Stored_Procedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Transaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="API\Dapper\Utilities\Transaction.Designer.cs">
+      <DependentUpon>Transaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionMessage.cs" />
+    <Compile Include="_draft\Dapper_vs_EF6\Delete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Delete.Designer.cs">
+      <DependentUpon>Delete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Insert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Insert.Designer.cs">
+      <DependentUpon>Insert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Query.Designer.cs">
+      <DependentUpon>Query.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_draft\Dapper_vs_EF6\Update.Designer.cs">
+      <DependentUpon>Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StartupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartupForm.Designer.cs">
+      <DependentUpon>StartupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="My.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Entity\EntitiesContextEFCore.cs" />
+    <Compile Include="_Entity\EntitiesContextEF6.cs" />
+    <Compile Include="_Entity\Invoice.cs" />
+    <Compile Include="_Entity\InvoiceContrib.cs" />
+    <Compile Include="_Entity\InvoiceDetailContrib.cs" />
+    <Compile Include="_Entity\InvoiceDetail.cs" />
+    <Compile Include="_Entity\InvoiceItem.cs" />
+    <Compile Include="_Entity\InvoiceKind.cs" />
+    <Compile Include="_Entity\StoreInvoice.cs" />
+    <Compile Include="_Entity\WebInvoice.cs" />
+    <EmbeddedResource Include="API\DapperContrib\DataAnnotations\Computed.resx">
+      <DependentUpon>Computed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\DataAnnotations\ExplicitKey.resx">
+      <DependentUpon>ExplicitKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\DataAnnotations\Key.resx">
+      <DependentUpon>Key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\DataAnnotations\Table.resx">
+      <DependentUpon>Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\DataAnnotations\Write.resx">
+      <DependentUpon>Write.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\Methods\Delete.resx">
+      <DependentUpon>Delete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\Methods\DeleteAll.resx">
+      <DependentUpon>DeleteAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\Methods\Get.resx">
+      <DependentUpon>Get.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\Methods\GetAll.resx">
+      <DependentUpon>GetAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\Methods\Insert.resx">
+      <DependentUpon>Insert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperContrib\Methods\Update.resx">
+      <DependentUpon>Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperPlus\Methods\Bulk_Delete.resx">
+      <DependentUpon>Bulk_Delete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperPlus\Methods\Bulk_Insert.resx">
+      <DependentUpon>Bulk_Insert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperPlus\Methods\Bulk_Merge.resx">
+      <DependentUpon>Bulk_Merge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\DapperPlus\Methods\Bulk_Update.resx">
+      <DependentUpon>Bulk_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\Execute.resx">
+      <DependentUpon>Execute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Parameter\Anonymous.resx">
+      <DependentUpon>Anonymous.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Parameter\Dynamic.resx">
+      <DependentUpon>Dynamic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Parameter\List.resx">
+      <DependentUpon>List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\QueryFirst.resx">
+      <DependentUpon>QueryFirst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\QueryFirstOrDefault.resx">
+      <DependentUpon>QueryFirstOrDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\QueryMultiple.resx">
+      <DependentUpon>QueryMultiple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\QuerySingle.resx">
+      <DependentUpon>QuerySingle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Methods\QuerySingleOrDefault.resx">
+      <DependentUpon>QuerySingleOrDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Parameter\String.resx">
+      <DependentUpon>String.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Result\Anonymous.resx">
+      <DependentUpon>Anonymous.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Result\Multi_Mapping.resx">
+      <DependentUpon>Multi_Mapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Result\Multi_Result.resx">
+      <DependentUpon>Multi_Result.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Result\Multi_Type.resx">
+      <DependentUpon>Multi_Type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Result\Strongly_Typed.resx">
+      <DependentUpon>Strongly_Typed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Utilities\Async.resx">
+      <DependentUpon>Async.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Utilities\Buffered.resx">
+      <DependentUpon>Buffered.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Utilities\Stored_Procedure.resx">
+      <DependentUpon>Stored_Procedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="API\Dapper\Utilities\Transaction.resx">
+      <DependentUpon>Transaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_draft\Dapper_vs_EF6\Delete.resx">
+      <DependentUpon>Delete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_draft\Dapper_vs_EF6\Insert.resx">
+      <DependentUpon>Insert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_draft\Dapper_vs_EF6\Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_draft\Dapper_vs_EF6\Update.resx">
+      <DependentUpon>Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StartupForm.resx">
+      <DependentUpon>StartupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="table-create.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

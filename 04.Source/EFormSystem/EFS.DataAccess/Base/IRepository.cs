@@ -14,20 +14,12 @@ namespace EFS.DataAccess.Base
     public interface IRepository<T> : IReadOnlyRepository<T> where T : EntityBase, IAggregateRoot
     {
         /// <summary>
-        /// Adds the specified item.
+        /// Inserts the specified item.
         /// </summary>
         /// <param name="item">
         /// The item.
         /// </param>
-        void Add(T item);
-
-        /// <summary>
-        /// Removes the specified item.
-        /// </summary>
-        /// <param name="item">
-        /// The item.
-        /// </param>
-        void Remove(T item);
+        void Insert(T item);
 
         /// <summary>
         /// The update.

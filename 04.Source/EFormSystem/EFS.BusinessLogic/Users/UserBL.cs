@@ -18,10 +18,10 @@ namespace EFS.BusinessLogic.Users
     {
         public UserBL(AppConfigures configs) : base(configs)
         {
-            _dataLayer = new UserDataAccess(_options.ConnectionString);
+            _useRepository = new UserRepository(_options.ConnectionString);
         }
 
-        private IUserDataAccess _dataLayer;
+        private IUserRepository _useRepository;
 
         public UserItem FindByAuthToken(string authenticationToken)
         {
@@ -30,7 +30,7 @@ namespace EFS.BusinessLogic.Users
 
         public UserItem FindByUsername(string username)
         {
-            var user = _dataLayer.FindByUsername(username);
+            var user = _useRepository.FindByUsername(username);
             return Mapper.Map<UserItem>(user);
         }
 
@@ -41,8 +41,6 @@ namespace EFS.BusinessLogic.Users
                 cfg.CreateMap<User, UserItem>();
                 cfg.CreateMap<UserItem, User>();
             });
-
-            base.RegisterMapper();
         }
     }
 }

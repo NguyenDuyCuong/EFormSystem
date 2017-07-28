@@ -17,7 +17,7 @@ namespace EFS.BusinessLogic.Base
     /// <typeparam name="T">
     /// The data entity.
     /// </typeparam>
-    public class BaseBusinessLogic<T> where T : ModelItem
+    public abstract class BaseBusinessLogic<T> where T : ModelItem
     {
         protected AppConfigures _options;
 
@@ -27,6 +27,6 @@ namespace EFS.BusinessLogic.Base
             RegisterMapper();
         }
 
-        protected virtual void RegisterMapper() { }
+        protected abstract void RegisterMapper();
     }
 }

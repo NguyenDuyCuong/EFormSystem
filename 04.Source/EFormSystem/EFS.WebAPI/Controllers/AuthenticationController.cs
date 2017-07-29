@@ -34,21 +34,28 @@ namespace EFS.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var user = _userBL.FindByUsername(item.Username);
-
-            if (user != null)
+            try
             {
-                if (user.Password == item.EncryptedPass)
+                var user = _userBL.FindByUsername(item.Username);
+
+                if (user != null)
                 {
-                    item.Token = TokenAuthentication.Token;
-                    item.Status = (int)Shared.AppEnums.AuthStatus.Login;
-                    item.LoginDate = DateTime.Now;
+                    if (user.Password == item.EncryptedPass)
+                    {
+                        item.Token = TokenAuthentication.Token;
+                        item.Status = (int)Shared.AppEnums.AuthStatus.Login;
+                        item.LoginDate = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    item.Status = (int)Shared.AppEnums.AuthStatus.Fail;
+                    return NotFound(item);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                item.Status = (int)Shared.AppEnums.AuthStatus.Fail;
-                return NotFound(item);
+                return StatusCode(500);
             }
 
             return Json(item);

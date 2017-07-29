@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper.Contrib" Version="1.50.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EFS.Common\EFS.Common.csproj" />
   </ItemGroup>
 

@@ -28,7 +28,7 @@ namespace EFS.DataAccess.Users
         /// </returns>
         public User FindByUsername(string username)
         {
-            return FindSingle("SELECT * FROM Users WHERE Username=@Username", new { Username = username });
+            return FindSingle("SELECT * FROM [User] WHERE Username=@Username", new { Username = username });
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace EFS.DataAccess.Users
         public User FindByAuthToken(string authenticationToken)
         {
             // TODO: Add real implementation. This is a stub
-            return FindSingle("SELECT TOP 1 * FROM Users", new { AuthToken = authenticationToken });
+            return FindSingle("SELECT TOP 1 * FROM User", new { AuthToken = authenticationToken });
         }
     }
 }

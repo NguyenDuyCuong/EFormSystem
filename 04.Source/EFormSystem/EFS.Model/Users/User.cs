@@ -1,4 +1,5 @@
-﻿using EFS.Common.Encryption;
+﻿using Dapper.Contrib.Extensions;
+using EFS.Common.Encryption;
 using EFS.Model.Base;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,8 @@ namespace EFS.Model.Users
         /// </value>
         public string Username { get; set; }
 
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        /// <value>
-        /// The password.
-        /// </value>
+        [Write(false)]
+        [Computed]
         public EncryptedString EncryptedPassword { get; set; }
 
         public string Password { get; set; }

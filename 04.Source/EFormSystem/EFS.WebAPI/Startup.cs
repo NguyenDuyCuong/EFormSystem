@@ -62,7 +62,7 @@ namespace EFS.WebAPI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}");
+                    template: "api/{controller}/{action}");
             });
         }
     }

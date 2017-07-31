@@ -42,5 +42,12 @@ namespace EFS.BusinessLogic.Users
                 cfg.CreateMap<UserItem, User>();
             });
         }
+
+        public UserItem CreateUser(string username, string password)
+        {
+            var user = _useRepository.Insert(new User() { Password = password, Username = username });
+            
+            return Mapper.Map<UserItem>(user);
+        }
     }
 }

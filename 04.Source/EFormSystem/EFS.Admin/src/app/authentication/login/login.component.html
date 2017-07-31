@@ -1,14 +1,14 @@
 <h2>Login form</h2>
 <p *ngIf="message">{{message}}</p>
-<div *ngIf="!IsLogin">
+<div *ngIf="!IsLogin || IsCreating">
   <input type="text" placeholder="Name" [(ngModel)]="username" />
   <input type="password" placeholder="Password" [(ngModel)]="password" />
 </div>
-<p>
+<p *ngIf="!IsCreating">
   <button (click)="login()" *ngIf="!IsLogin">Login</button>
   <button (click)="logout()" *ngIf="IsLogin">Logout</button>
-  <a href="">Register</a>
+  <button (click)="changeState('Create')">Register</button>
 </p>
-<p>
-  <button (click)="Register()" *ngIf="!IsLogin">Register</button>  
+<p *ngIf="IsCreating">
+  <button (click)="register()" *ngIf="!IsLogin">Register</button>  
 </p>

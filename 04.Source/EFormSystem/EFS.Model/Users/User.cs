@@ -11,6 +11,7 @@ namespace EFS.Model.Users
     /// <summary>
     /// A user with the admin system.
     /// </summary>
+    [Table("[User]")]
     public sealed class User : EntityBase, IAggregateRoot
     {
         /// <summary>

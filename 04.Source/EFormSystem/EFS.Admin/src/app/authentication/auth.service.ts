@@ -20,16 +20,20 @@ export class AuthService {
   
   // store the URL so we can redirect after logging in
   redirectUrl: string;
-  urlAPI: string;
+  urlsAPI = {
+    login: '',
+    register: ''
+  };
 
   constructor(private http: HttpClient) { 
-    this.urlAPI = AppConstants.ROOT_URI + '/Authentication';
+    this.urlsAPI.login = AppConstants.ROOT_URI + '/Authentication/Login';
+    this.urlsAPI.register = AppConstants.ROOT_URI + '/Authentication/Register';
   }
 
-  login(username:string, password:string, successCallback, failCallback): Observable<any> {
+  login(username:string, password:string, successCallback, failCallback): void {
     this.authInfo = new Certification({username: username, password: password});
     var body = JSON.stringify(this.authInfo);
-    return Helper.InvokeAPIFull(this.urlAPI, 'post', body, this.http)
+    Helper.InvokeAPIFull(this.urlsAPI.login, 'post', body, this.http)
       .subscribe(resp => {
         if (resp.body){          
           this.authInfo = new Certification(resp.body);
@@ -76,5 +80,19 @@ export class AuthService {
     }
 
     return false;
+  }
+
+  register(username:string, password:string, successCallback, failCallback): void {
+    this.authInfo = new Certification({username: username, password: password});
+    var body = JSON.stringify(this.authInfo);
+    Helper.InvokeAPIFull(this.urlsAPI.register, 'post', body, this.http)
+      .subscribe(resp => {
+        if (resp.body){
+          successCallback(resp.body);
+        }
+      },
+      error => {
+        failCallback(error);
+      });
   }
 }

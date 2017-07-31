@@ -6,6 +6,7 @@ using EFS.WebAPI.Filters;
 using EFS.WebAPI.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace EFS.WebAPI.Controllers
     {
         private readonly IEncryptionService _encryptionService;
         private readonly IUserBL _userBL;
-        
+
         public AuthenticationController(
             IEncryptionService encryptionService,
             IOptions<AppConfigures> optionsAccessor) : base(optionsAccessor)
@@ -27,9 +28,10 @@ namespace EFS.WebAPI.Controllers
             _userBL = new UserBL(_options);
             _encryptionService = encryptionService;
         }
-        
+
         [HttpPost]
-        public IActionResult Post([FromBody]AuthenticationItem item)
+        [Route("Login")]
+        public IActionResult Login([FromBody]AuthenticationItem item)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -55,7 +57,28 @@ namespace EFS.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500);
+                return StatusCode(500, ex);
+            }
+
+            return Json(item);
+        }
+
+        [HttpPost]
+        [Route("Register")]
+        public IActionResult Register([FromBody]AuthenticationItem item)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            try
+            {
+                var user = _userBL.CreateUser(item.Username, item.EncryptedPass);
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
             }
 
             return Json(item);

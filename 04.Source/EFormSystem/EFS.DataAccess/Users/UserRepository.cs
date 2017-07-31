@@ -41,7 +41,7 @@ namespace EFS.DataAccess.Users
         public User FindByAuthToken(string authenticationToken)
         {
             // TODO: Add real implementation. This is a stub
-            return FindSingle("SELECT TOP 1 * FROM User", new { AuthToken = authenticationToken });
+            return FindSingle("SELECT TOP 1 * FROM [User]", new { AuthToken = authenticationToken });
         }
     }
 }

@@ -19,7 +19,7 @@ namespace EFS.DataAccess.Base
         /// <param name="item">
         /// The item.
         /// </param>
-        void Insert(T item);
+        T Insert(T item);
 
         /// <summary>
         /// The update.

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper.Contrib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -28,6 +29,8 @@ namespace EFS.Model.Base
         /// <value>
         ///   <c>true</c> if this instance is valid; otherwise, <c>false</c>.
         /// </value>
+        [Write(false)]
+        [Computed]
         public virtual bool IsValid
         {
             get
@@ -44,6 +47,8 @@ namespace EFS.Model.Base
         /// <value>
         /// The validation errors.
         /// </value>
+        [Write(false)]
+        [Computed]
         public virtual ValidationErrors ValidationErrors
         {
             get { return _validationErrors; }

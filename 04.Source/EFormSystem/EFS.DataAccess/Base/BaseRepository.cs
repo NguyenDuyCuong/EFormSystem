@@ -63,11 +63,14 @@ namespace EFS.DataAccess.Base
             return item;
         }
 
-        public virtual void Insert(T item) {
+        public virtual T Insert(T item) {
             using (IDbConnection cn = Connection)
             {
+                item.ID = Guid.NewGuid();
                 cn.Open();
                 cn.Insert<T>(item);
+
+                return cn.Get<T>(item.ID);
             }
         }
 

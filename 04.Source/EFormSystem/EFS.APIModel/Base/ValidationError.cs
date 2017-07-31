@@ -1,8 +1,9 @@
-﻿using System;
+﻿using EFS.Common.Global;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EFS.Model.Base
+namespace EFS.APIModel.Base
 {
     /// <summary>
     /// Validation error.
@@ -25,6 +26,8 @@ namespace EFS.Model.Base
         /// </value>
         public string Message { get; set; }
 
+        public ValidationErrorType ErrorType { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationError"/> class.
         /// </summary>
@@ -38,6 +41,14 @@ namespace EFS.Model.Base
         {
             this.PropertyName = propertyName;
             this.Message = message;
+            this.ErrorType = ValidationErrorType.UnHandleError;
+        }
+
+        public ValidationError(string propertyName, string message, ValidationErrorType errType)
+        {
+            this.PropertyName = propertyName;
+            this.Message = message;
+            this.ErrorType = errType;
         }
     }
 }

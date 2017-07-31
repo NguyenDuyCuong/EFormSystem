@@ -35,21 +35,5 @@ namespace EFS.Model.Users
         public EncryptedString EncryptedPassword { get; set; }
 
         public string Password { get; set; }
-
-        /// <summary>
-        /// Validates this instance.
-        /// </summary>
-        protected override void Validate()
-        {
-            if (string.IsNullOrEmpty(Username))
-            {
-                ValidationErrors.Add("Username");
-            }
-
-            if (Password == null || !EncryptedPassword.EncryptedValue.Any())
-            {
-                ValidationErrors.Add("Password");
-            }
-        }
     }
 }

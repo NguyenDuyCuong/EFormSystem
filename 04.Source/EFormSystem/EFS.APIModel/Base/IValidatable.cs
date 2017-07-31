@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EFS.Model.Base
+namespace EFS.APIModel.Base
 {
     /// <summary>
     /// IValidatable interface.

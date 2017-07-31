@@ -2,7 +2,7 @@ import {Helper} from '../shared/sys/app-helper';
 
 export class Certification {
     username: string;
-    encryptedPass: string;
+    password: string;
     token: string;
     loginDate: Date;
     status = 0;
@@ -10,7 +10,7 @@ export class Certification {
 
     constructor( data: any ){ 
         this.username = data.username;
-        this.encryptedPass = Helper.Encrypt(data.encryptedPass, data.username);
+        this.password = Helper.Encrypt(data.password, data.username);
         if (data.token)
             this.token = data.token;
         if (data.loginDate){

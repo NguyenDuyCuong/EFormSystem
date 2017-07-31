@@ -1,9 +1,9 @@
 ﻿using EFS.APIModel.Authentication;
+using EFS.BusinessLogic.Authentication;
 using EFS.BusinessLogic.Users;
 using EFS.Common.Encryption;
 using EFS.Common.Global;
 using EFS.WebAPI.Filters;
-using EFS.WebAPI.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
@@ -19,13 +19,13 @@ namespace EFS.WebAPI.Controllers
     public class AuthenticationController : BaseController
     {
         private readonly IEncryptionService _encryptionService;
-        private readonly IUserBL _userBL;
+        private readonly AuthenticationBL _authBL;
 
         public AuthenticationController(
             IEncryptionService encryptionService,
             IOptions<AppConfigures> optionsAccessor) : base(optionsAccessor)
         {
-            _userBL = new UserBL(_options);
+            _authBL = new AuthenticationBL(_options);
             _encryptionService = encryptionService;
         }
 
@@ -38,29 +38,22 @@ namespace EFS.WebAPI.Controllers
 
             try
             {
-                var user = _userBL.FindByUsername(item.Username);
+                var user = _authBL.Login(item);
 
-                if (user != null)
+                if (user.IsValid)
                 {
-                    if (user.Password == item.EncryptedPass)
-                    {
-                        item.Token = TokenAuthentication.Token;
-                        item.Status = (int)Shared.AppEnums.AuthStatus.Login;
-                        item.LoginDate = DateTime.Now;
-                    }
+                    item.Token = TokenAuthentication.Token;
+                    return Ok(item);
                 }
                 else
                 {
-                    item.Status = (int)Shared.AppEnums.AuthStatus.Fail;
-                    return NotFound(item);
+                    return StatusCode(500, item.ValidationErrors);
                 }
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex);
             }
-
-            return Json(item);
         }
 
         [HttpPost]
@@ -72,16 +65,17 @@ namespace EFS.WebAPI.Controllers
 
             try
             {
-                var user = _userBL.CreateUser(item.Username, item.EncryptedPass);
+                var user = _authBL.Register(item);
 
-                return Ok(user);
+                if (user.IsValid)
+                    return Ok(user);
+                else
+                    return StatusCode(500, user.ValidationErrors);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex);
             }
-
-            return Json(item);
         }
     }
 }

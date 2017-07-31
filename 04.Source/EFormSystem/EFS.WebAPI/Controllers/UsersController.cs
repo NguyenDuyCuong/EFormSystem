@@ -4,7 +4,6 @@ using EFS.Common.Encryption;
 using EFS.Common.Global;
 using EFS.Model.Users;
 using EFS.WebAPI.Filters;
-using EFS.WebAPI.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;

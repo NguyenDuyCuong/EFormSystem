@@ -35,8 +35,8 @@ export class LoginComponent {
       this.router.navigate([redirect], navigationExtras);
     },
     (error)=>{
-      if (error.status == '404') {
-        this.message = 'Wrong username!';
+      if (error.status == '500') {
+        this.message = error.error.items[0].message;
       }
     });
   }
@@ -47,7 +47,7 @@ export class LoginComponent {
 
   register(){
     this.authService.register(this.username, this.password, (data)=>{
-      var redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
+      var redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/login';
       var navigationExtras: NavigationExtras = {
         queryParamsHandling: 'preserve',
         preserveFragment: true
@@ -56,8 +56,8 @@ export class LoginComponent {
       this.router.navigate([redirect], navigationExtras);
     },
     (error)=>{
-      if (error.status == '404') {
-        this.message = 'Wrong username!';
+      if (error.status == '500') {
+        this.message = error.error.items[0].message;
       }
     });
   }

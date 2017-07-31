@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EFS.WebAPI.Shared;
 using Microsoft.Extensions.Options;
 using EFS.Common.Global;
 

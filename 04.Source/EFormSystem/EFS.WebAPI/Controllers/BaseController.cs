@@ -3,7 +3,6 @@ using EFS.BusinessLogic.Base;
 using EFS.Common.Global;
 using EFS.DataAccess.Base;
 using EFS.WebAPI.Authentication;
-using EFS.WebAPI.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;

@@ -11,7 +11,6 @@ using EFS.Common.Encryption;
 using EFS.BusinessLogic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using EFS.WebAPI.Shared;
 using EFS.Common.Global;
 
 namespace EFS.WebAPI

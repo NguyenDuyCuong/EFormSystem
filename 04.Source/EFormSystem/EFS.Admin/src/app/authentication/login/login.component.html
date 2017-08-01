@@ -4,6 +4,9 @@
   <input type="text" placeholder="Name" [(ngModel)]="username" />
   <input type="password" placeholder="Password" [(ngModel)]="password" />
 </div>
+<div *ngIf="IsLogin">
+  <button (click)="test()">Test</button>  
+</div>
 <p *ngIf="!IsCreating">
   <button (click)="login()" *ngIf="!IsLogin">Login</button>
   <button (click)="logout()" *ngIf="IsLogin">Logout</button>

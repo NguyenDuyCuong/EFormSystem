@@ -65,4 +65,8 @@ export class LoginComponent {
   changeState(formState: string){
     this.formstate = FormState[formState];
   }
+
+  test(){
+    this.authService.test();
+  }
 }

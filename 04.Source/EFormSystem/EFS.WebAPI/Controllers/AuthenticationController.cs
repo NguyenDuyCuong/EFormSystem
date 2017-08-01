@@ -4,6 +4,7 @@ using EFS.BusinessLogic.Users;
 using EFS.Common.Encryption;
 using EFS.Common.Global;
 using EFS.WebAPI.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace EFS.WebAPI.Controllers
 {
@@ -42,7 +44,7 @@ namespace EFS.WebAPI.Controllers
 
                 if (user.IsValid)
                 {
-                    item.Token = TokenAuthentication.Token;
+                    item.Token = TokenAuth.GenerateToken(user.Username);
                     return Ok(item);
                 }
                 else

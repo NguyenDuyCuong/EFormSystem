@@ -18,8 +18,8 @@ namespace EFS.Common.Encryption
         /// <returns>
         /// The <see cref="byte[]"/>.
         /// </returns>
-        byte[] Encrypt(string value, byte[] key, byte[] iv);
-        string Decrypt(byte[] cipherText, byte[] key, byte[] iv);
+        byte[] Encrypt(string value);
+        string Decrypt(byte[] cipherText);
 
 
     }

@@ -21,7 +21,7 @@ export class Helper{
     static InvokeAPI(url: string, method: any, body: any, http: HttpClient, authToken = '', ...args){
         var headers = new HttpHeaders().set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8');
         if (authToken)
-            headers.set('Authorization', authToken)
+            headers.set('Authorization', 'Basic ' + authToken)
         var params = new HttpParams();
         args.forEach(arg => {
             if (arg.key)
@@ -37,7 +37,7 @@ export class Helper{
     static InvokeAPIFull(url: string, method: any, body: any, http: HttpClient, authToken = '', ...args){
         var headers = new HttpHeaders().set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8');
         if (authToken)
-            headers.set('Authorization', authToken)
+            headers.set('Authorization', 'Basic ' + authToken)
         var params = new HttpParams();
         args.forEach(arg => {
             if (arg.key)

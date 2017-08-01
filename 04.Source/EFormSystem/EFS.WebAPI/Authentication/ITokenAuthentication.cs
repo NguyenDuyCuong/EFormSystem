@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace EFS.WebAPI.Authentication
 {
@@ -25,5 +27,7 @@ namespace EFS.WebAPI.Authentication
         /// The <see cref="bool"/>.
         /// </returns>
         bool IsValid(string token);
+
+        string GenerateToken(string username, int expireMinutes = 20);
     }
 }

@@ -12,6 +12,10 @@ using EFS.BusinessLogic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using EFS.Common.Global;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using EFS.WebAPI.Authentication;
 
 namespace EFS.WebAPI
 {
@@ -45,7 +49,7 @@ namespace EFS.WebAPI
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
-                        
+
             services.AddSingleton<IEncryptionService, EncryptionService>();
         }
 

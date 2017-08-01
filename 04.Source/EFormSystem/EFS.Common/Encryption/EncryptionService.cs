@@ -11,7 +11,7 @@ namespace EFS.Common.Encryption
     /// </summary>
     public class EncryptionService : IEncryptionService
     {
-        public byte[] Encrypt(string plainText, byte[] key, byte[] iv)
+        public byte[] Encrypt(string plainText)
         {
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
@@ -21,8 +21,8 @@ namespace EFS.Common.Encryption
             // with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = key;
-                aesAlg.IV = iv;
+                aesAlg.Key = Encoding.ASCII.GetBytes(Global.AppConsts.SecretKey);
+                aesAlg.IV = Encoding.ASCII.GetBytes(Global.AppConsts.IV);
 
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
@@ -48,7 +48,7 @@ namespace EFS.Common.Encryption
 
         }
 
-        public string Decrypt(byte[] cipherText, byte[] key, byte[] iv)
+        public string Decrypt(byte[] cipherText)
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
@@ -62,8 +62,8 @@ namespace EFS.Common.Encryption
             // with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = key;
-                aesAlg.IV = iv;
+                aesAlg.Key = Encoding.ASCII.GetBytes(Global.AppConsts.SecretKey);
+                aesAlg.IV = Encoding.ASCII.GetBytes(Global.AppConsts.IV);
 
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);

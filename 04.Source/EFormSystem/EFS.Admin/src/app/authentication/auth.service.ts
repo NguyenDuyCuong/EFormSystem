@@ -95,4 +95,17 @@ export class AuthService {
         failCallback(error);
       });
   }
+
+  test(): void {
+    var body = JSON.stringify(this.authInfo);
+    Helper.InvokeAPIFull(AppConstants.ROOT_URI + '/Users/Test', 'get', body, this.http, this.authInfo.token)
+      .subscribe(resp => {
+        if (resp.body){
+          alert('');
+        }
+      },
+      error => {
+        
+      });
+  }
 }

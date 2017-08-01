@@ -10,22 +10,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EFS.WebAPI.Controllers
 {
-    [TokenValidationAttribute]
+    [TokenValidation]
+    [UnhandledException]
     public class UsersController : BaseController
     {
         private readonly IEncryptionService _encryptionService;
         private readonly IUserBL _userBL;
 
         public UsersController(
-            IUserBL userBL,
             IEncryptionService encryptionService,
             IOptions<AppConfigures> optionsAccessor): base(optionsAccessor)
         {
-            _userBL = userBL;
+            _userBL = new UserBL(_options);
             _encryptionService = encryptionService;
+        }
+        
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return Ok();
         }
     }
 }

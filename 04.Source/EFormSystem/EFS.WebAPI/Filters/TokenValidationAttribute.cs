@@ -28,7 +28,7 @@ namespace EFS.WebAPI.Filters
                 string token = actionContext.HttpContext.Request.Headers["Authorization"];
                 var controller = (BaseController)actionContext.Controller;
 
-                if (controller.TokenAuthentication.IsValid(token))
+                if (controller.TokenAuth.IsValid(token))
                 {
                     base.OnActionExecuting(actionContext);
                 }

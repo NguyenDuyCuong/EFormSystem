@@ -10,9 +10,6 @@ namespace EFS.Common.Global
     {
         public string key { get; set; }
         public string iv { get; set; }
-
-        public byte[] GetKey() {  return Encoding.ASCII.GetBytes(key);  }
-        public byte[] GetIV() { return Encoding.ASCII.GetBytes(iv);  }
     }
 
     public class AppConfigures

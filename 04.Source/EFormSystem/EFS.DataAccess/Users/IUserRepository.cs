@@ -21,5 +21,6 @@ namespace EFS.DataAccess.Users
         /// The <see cref="User"/>.
         /// </returns>
         User FindByUsername(string username);
+        User FindByNamePass(string username, byte[] password);
     }
 }

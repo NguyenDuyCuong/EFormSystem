@@ -25,8 +25,8 @@ namespace EFS.WebAPI.Controllers
             IEncryptionService encryptionService,
             IOptions<AppConfigures> optionsAccessor) : base(optionsAccessor)
         {
-            _authBL = new AuthenticationBL(_options);
             _encryptionService = encryptionService;
+            _authBL = new AuthenticationBL(_options, encryptionService);
         }
 
         [HttpPost]

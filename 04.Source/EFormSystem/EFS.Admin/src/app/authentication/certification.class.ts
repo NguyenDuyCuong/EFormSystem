@@ -10,7 +10,7 @@ export class Certification {
 
     constructor( data: any ){ 
         this.username = data.username;
-        this.password = Helper.Encrypt(data.password, data.username);
+        this.password = data.password;
         if (data.token)
             this.token = data.token;
         if (data.loginDate){

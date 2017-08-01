@@ -34,6 +34,6 @@ namespace EFS.Model.Users
         [Computed]
         public EncryptedString EncryptedPassword { get; set; }
 
-        public string Password { get; set; }
+        public byte[] Password { get; set; }
     }
 }

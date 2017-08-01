@@ -8,16 +8,19 @@ using AutoMapper;
 using EFS.Model.Users;
 using EFS.APIModel.Authentication;
 using EFS.DataAccess.Users;
+using EFS.Common.Encryption;
 
 namespace EFS.BusinessLogic.Authentication
 {
     public class AuthenticationBL : BaseBusinessLogic<UserItem>
     {
-        private IUserRepository _useRepository;
+        private readonly IUserRepository _useRepository;
+        private readonly IEncryptionService _encryptionService;
 
-        public AuthenticationBL(AppConfigures configs) : base(configs)
+        public AuthenticationBL(AppConfigures configs, IEncryptionService encryptionService) : base(configs)
         {
             _useRepository = new UserRepository(configs.ConnectionString);
+            _encryptionService = encryptionService;
         }
 
         protected override void RegisterMapper()
@@ -40,7 +43,7 @@ namespace EFS.BusinessLogic.Authentication
             {
                 user = _useRepository.Insert(new User() {
                     Username = item.Username,
-                    Password = item.Password,
+                    Password = _encryptionService.Encrypt(item.Password, _options.Crypto.GetKey(), _options.Crypto.GetIV()),
                 });                
             }
 
@@ -49,17 +52,15 @@ namespace EFS.BusinessLogic.Authentication
 
         public AuthenticationItem Login(AuthenticationItem item)
         {
-            var user = _useRepository.FindByUsername(item.Username);
+            var encryptedPass = _encryptionService.Encrypt(item.Password, _options.Crypto.GetKey(), _options.Crypto.GetIV());
+            var user = _useRepository.FindByNamePass(item.Username, encryptedPass);
 
             if (user != null)
             {
-                if (user.Password == item.Password)
-                {
-                    item.LoginDate = DateTime.Now;
-                    item.Status = (int)AuthStatus.Login;
+                item.LoginDate = DateTime.Now;
+                item.Status = (int)AuthStatus.Login;
 
-                    return item;
-                }
+                return item;
             }
 
             item.Status = (int)AuthStatus.Fail;

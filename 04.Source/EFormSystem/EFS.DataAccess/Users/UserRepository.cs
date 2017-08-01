@@ -31,6 +31,11 @@ namespace EFS.DataAccess.Users
             return FindSingle("SELECT * FROM [User] WHERE Username=@Username", new { Username = username });
         }
 
+        public User FindByNamePass(string username, byte[] password)
+        {
+            return FindSingle("SELECT * FROM [User] WHERE Username=@Username AND Password=@Pass", new { Username = username, Pass = password });
+        }
+
         /// <summary>
         /// Find user by authentication token.
         /// </summary>

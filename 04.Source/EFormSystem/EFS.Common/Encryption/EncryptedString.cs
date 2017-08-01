@@ -37,9 +37,9 @@ namespace EFS.Common.Encryption
         /// <returns>
         /// The <see cref="EncryptedString"/>.
         /// </returns>
-        public static EncryptedString Create(string value, IEncryptionService encryptionService)
-        {
-            return new EncryptedString(encryptionService.Encrypt(value));
-        }
+        //public static EncryptedString Create(string value, IEncryptionService encryptionService)
+        //{
+        //    return new EncryptedString(encryptionService.Encrypt(value));
+        //}
     }
 }

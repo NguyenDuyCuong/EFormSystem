@@ -12,6 +12,5 @@ namespace EFS.BusinessLogic.Users
     {
         UserItem FindByUsername(string username);
         UserItem FindByAuthToken(string authenticationToken);
-        UserItem CreateUser(string username, string password);
     }
 }

@@ -3,15 +3,17 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export class Helper{
     static Encrypt(message:string, key:string) {
-        var keyHex = CryptoJS.enc.Utf8.parse(key);
-        var encrypted = CryptoJS.DES.encrypt(message, key, {mode: CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});        
+        //var keyHex = CryptoJS.enc.Utf8.parse(key);
+        //var encrypted = CryptoJS.DES.encrypt(message, key, {mode: CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});        
+        var encrypted = CryptoJS.AES.encrypt(message, "Secret Passphrase");
         
-        return encrypted.toString();
+        return encrypted;
     }
 
     static Decrypt(ciphertext: string, key: string) {
-        var keyHex = CryptoJS.enc.Utf8.parse(key);        
-        var decrypted = CryptoJS.DES.decrypt({ciphertext: CryptoJS.enc.Base64.parse(ciphertext)}, keyHex, {mode: CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        //var keyHex = CryptoJS.enc.Utf8.parse(key);        
+        //var decrypted = CryptoJS.DES.decrypt({ciphertext: CryptoJS.enc.Base64.parse(ciphertext)}, keyHex, {mode: CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        var decrypted = CryptoJS.AES.decrypt(ciphertext, "Secret Passphrase");
 
         return decrypted.toString(CryptoJS.enc.Utf8);
     }

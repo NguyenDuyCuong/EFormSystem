@@ -30,7 +30,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string): boolean {
-    if (this.authService.Vertify()) { return true; }
+    if (this.authService.Vertify()) { 
+      return true; 
+    }
     
     // Store the attempted URL for redirecting
     console.log('ath.guard: ' + url);

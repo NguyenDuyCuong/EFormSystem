@@ -19,11 +19,8 @@ export class Helper{
     }
 
     static InvokeAPI(url: string, method: any, body: any, http: HttpClient, authToken = '', ...args){
-        var headers = new HttpHeaders().set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8');
-        if (authToken){
-            headers.append('Authorization', authToken);
-            method = 'post';
-        }
+        var header = new HttpHeaders().set('Authorization', authToken).set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8');
+
         var params = new HttpParams();
         args.forEach(arg => {
             if (arg.key)
@@ -31,12 +28,14 @@ export class Helper{
         });
        
         return http[method](url, body, {
-            headers: headers,
+            headers: header,
             params: params,
         });
     }
 
     static InvokeAPIFull(url: string, method: any, body: any, http: HttpClient, authToken = '', ...args){        
+        var header = new HttpHeaders().set('Authorization', authToken).set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8');
+        
         var params = new HttpParams();
         args.forEach(arg => {
             if (arg.key)
@@ -44,7 +43,7 @@ export class Helper{
         });
        
         return http[method](url, body, {
-            headers:  new HttpHeaders().set('Authorization', authToken).set('Content-Type', 'application/json').set('data-type', 'application/json; charset=utf-8'),
+            headers:  header,
             params: params,
             observe: 'response',
         });

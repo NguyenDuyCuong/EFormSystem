@@ -37,15 +37,16 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     // Store the attempted URL for redirecting
     console.log('ath.guard: ' + url);
     this.authService.redirectUrl = url;
-
-    // Create a dummy session id
-    let sessionId = 123456789;
+    
+    if (url.includes('/login'))
+      return true;
 
     // Set our navigation extras object
     // that contains our global query params and fragment
     let navigationExtras: NavigationExtras = {
       
     };
+    
     
     // Navigate to the login page with extras
     this.router.navigate(['/login'], navigationExtras);

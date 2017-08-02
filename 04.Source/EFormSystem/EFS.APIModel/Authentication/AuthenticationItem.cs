@@ -22,5 +22,7 @@ namespace EFS.APIModel.Authentication
         public DateTime LoginDate { get; set; }
 
         public int Status { get; set; }
+
+        public bool IsRemember { get; set; }
     }
 }

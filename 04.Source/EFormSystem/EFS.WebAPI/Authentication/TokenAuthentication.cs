@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿using EFS.APIModel.Authentication;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,9 @@ namespace EFS.WebAPI.Authentication
             get; private set;
         }
 
-        public string GenerateToken(string username, int expireMinutes = 20)
+        public string GenerateToken(AuthenticationItem user)
         {
+            int expireMinutes = 20;
             var symmetricKey = Encoding.ASCII.GetBytes(EFS.Common.Global.AppConsts.SecretKey);
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -30,10 +32,10 @@ namespace EFS.WebAPI.Authentication
             {
                 Subject = new ClaimsIdentity(new[]
                         {
-                            new Claim(ClaimTypes.Name, username)
+                            new Claim(ClaimTypes.Name, user.Username),
                         }),
-
-                Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+                
+                Expires = user.IsRemember? (null as Nullable<DateTime>): now.AddMinutes(Convert.ToInt32(expireMinutes)),
 
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256Signature)
             };

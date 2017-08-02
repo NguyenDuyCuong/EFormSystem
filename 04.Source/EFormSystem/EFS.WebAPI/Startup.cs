@@ -16,6 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using EFS.WebAPI.Authentication;
+using log4net;
 
 namespace EFS.WebAPI
 {

@@ -32,7 +32,6 @@ namespace EFS.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("Login")]
         public IActionResult Login([FromBody]AuthenticationItem item)
         {
             if (!ModelState.IsValid)
@@ -44,7 +43,7 @@ namespace EFS.WebAPI.Controllers
 
                 if (user.IsValid)
                 {
-                    item.Token = TokenAuth.GenerateToken(user.Username);
+                    item.Token = TokenAuth.GenerateToken(user);
                     return Ok(item);
                 }
                 else
@@ -59,7 +58,6 @@ namespace EFS.WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("Register")]
         public IActionResult Register([FromBody]AuthenticationItem item)
         {
             if (!ModelState.IsValid)

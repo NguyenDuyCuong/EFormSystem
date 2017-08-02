@@ -34,13 +34,13 @@ namespace EFS.WebAPI.Filters
                 }
                 else
                 {
-                    var actionResult = new ContentResult() { Content = "Unauthorized Request", StatusCode = (int)HttpStatusCode.Forbidden };                    
+                    var actionResult = new UnauthorizedResult();                    
                     actionContext.Result = actionResult;
                 }
             }
             catch (Exception ex)
             {
-                var actionResult = new ContentResult() { Content = "Missing Authorization Token", StatusCode = (int)HttpStatusCode.BadRequest };
+                var actionResult = new BadRequestResult();
                 actionContext.Result = actionResult;
             }
         }

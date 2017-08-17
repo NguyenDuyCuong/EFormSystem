@@ -1,41 +1,16 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClientXsrfModule }        from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { Router } from '@angular/router';
-
-import { AppComponent }            from './app.component';
-import { AppRoutingModule }        from './app-routing.module';
-
-import { LoginRoutingModule }      from './authentication/login/login-routing.module';
-import { LoginComponent }          from './authentication/login/login.component';
-import { PageNotFoundComponent }   from './not-found.component';
-
-import { DashboardModule } from './dashboard/dashboard.module'
+import { AppComponent } from './app.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'My-Xsrf-Cookie',
-      headerName: 'My-Xsrf-Header',
-    }),
-    FormsModule,
-    DashboardModule,
-    LoginRoutingModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
-  ],
   declarations: [
-    AppComponent,
-    LoginComponent,
-    PageNotFoundComponent,
+    AppComponent
   ],
-  providers: [
+  imports: [
+    BrowserModule
   ],
-  bootstrap: [ AppComponent ]
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+
 import  { AuthService } from '../auth.service';
 
 import { FormState } from '../../shared/sys/app-enums';
-
 
 @Component({
   templateUrl: './login.component.html',

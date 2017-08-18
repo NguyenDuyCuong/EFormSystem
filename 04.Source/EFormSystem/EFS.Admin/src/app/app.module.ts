@@ -15,6 +15,8 @@ import { PageNotFoundComponent }   from './not-found.component';
 
 import { DashboardModule } from './dashboard/dashboard.module'
 
+import {MdButtonModule, MdCheckboxModule, MdInputModule} from '@angular/material';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { DashboardModule } from './dashboard/dashboard.module'
     DashboardModule,
     LoginRoutingModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MdButtonModule, MdCheckboxModule, MdInputModule
   ],
   declarations: [
     AppComponent,

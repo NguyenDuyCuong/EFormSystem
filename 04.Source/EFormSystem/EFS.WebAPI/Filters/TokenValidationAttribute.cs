@@ -26,13 +26,12 @@ namespace EFS.WebAPI.Filters
             try
             {
                 string token = actionContext.HttpContext.Request.Headers["Authorization"];
-
-                if (token == null && actionContext.HttpContext.Request.Method == "get")
-                    return;
+                var remoteIpAddress = actionContext.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+                var agent = actionContext.HttpContext.Request.Headers["User-Agent"].ToString();
 
                 var controller = (BaseController)actionContext.Controller;
-
-                if (controller.TokenAuth.IsValid(token))
+                
+                if (controller.TokenAuth.IsTokenValid(token, remoteIpAddress, agent))
                 {
                     base.OnActionExecuting(actionContext);
                 }

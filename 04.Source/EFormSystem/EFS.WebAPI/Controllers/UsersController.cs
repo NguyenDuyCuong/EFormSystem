@@ -1,6 +1,5 @@
 ﻿using EFS.APIModel.Users;
 using EFS.BusinessLogic.Users;
-using EFS.Common.Encryption;
 using EFS.Common.Global;
 using EFS.Model.Users;
 using EFS.WebAPI.Filters;
@@ -12,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
+using EFS.Common.Authentication;
 
 namespace EFS.WebAPI.Controllers
 {
@@ -19,15 +19,13 @@ namespace EFS.WebAPI.Controllers
     [UnhandledException]
     public class UsersController : BaseController
     {
-        private readonly IEncryptionService _encryptionService;
         private readonly IUserBL _userBL;
 
         public UsersController(
-            IEncryptionService encryptionService,
-            IOptions<AppConfigures> optionsAccessor): base(optionsAccessor)
+            IOptions<AppConfigures> optionsAccessor
+            , ITokenAuthorizationService authenService) : base(optionsAccessor, authenService)
         {
             _userBL = new UserBL(_options);
-            _encryptionService = encryptionService;
         }
         
         [HttpGet]

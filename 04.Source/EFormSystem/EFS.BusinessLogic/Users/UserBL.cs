@@ -5,7 +5,6 @@ using EFS.BusinessLogic.Base;
 using EFS.Model.Users;
 using System.Data;
 using Dapper;
-using EFS.Common.Encryption;
 using System.Linq;
 using EFS.APIModel.Users;
 using EFS.DataAccess.Users;

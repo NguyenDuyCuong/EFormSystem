@@ -1,7 +1,5 @@
-﻿using EFS.APIModel.Authentication;
-using EFS.BusinessLogic.Authentication;
+﻿using EFS.BusinessLogic.Authentication;
 using EFS.BusinessLogic.Users;
-using EFS.Common.Encryption;
 using EFS.Common.Global;
 using EFS.WebAPI.Filters;
 using Microsoft.AspNetCore.Authorization;
@@ -14,21 +12,21 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
+using EFS.APIModel.Authentication;
+using EFS.Common.Authentication;
 
 namespace EFS.WebAPI.Controllers
 {
     [UnhandledException]
     public class AuthenticationController : BaseController
     {
-        private readonly IEncryptionService _encryptionService;
         private readonly AuthenticationBL _authBL;
 
         public AuthenticationController(
-            IEncryptionService encryptionService,
-            IOptions<AppConfigures> optionsAccessor) : base(optionsAccessor)
+            IOptions<AppConfigures> optionsAccessor
+            , ITokenAuthorizationService authenService) : base(optionsAccessor, authenService)
         {
-            _encryptionService = encryptionService;
-            _authBL = new AuthenticationBL(_options, encryptionService);
+            _authBL = new AuthenticationBL(_options);
         }
 
         [HttpPost]
@@ -43,7 +41,7 @@ namespace EFS.WebAPI.Controllers
 
                 if (user.IsValid)
                 {
-                    item.Token = TokenAuth.GenerateToken(user);
+                    //item.Token = TokenAuth.GenerateToken(user);
                     return Ok(item);
                 }
                 else

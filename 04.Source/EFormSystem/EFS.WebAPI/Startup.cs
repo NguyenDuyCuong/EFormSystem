@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using EFS.Common.Encryption;
 using EFS.BusinessLogic.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
@@ -15,8 +14,8 @@ using EFS.Common.Global;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using EFS.WebAPI.Authentication;
 using log4net;
+using EFS.Common.Authentication;
 
 namespace EFS.WebAPI
 {
@@ -51,7 +50,7 @@ namespace EFS.WebAPI
                     .AllowCredentials());
             });
 
-            services.AddSingleton<IEncryptionService, EncryptionService>();
+            services.AddSingleton<ITokenAuthorizationService, TokenAuthorizationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

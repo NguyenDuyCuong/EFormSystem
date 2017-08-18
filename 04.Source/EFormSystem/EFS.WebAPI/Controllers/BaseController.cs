@@ -1,8 +1,8 @@
 ﻿using EFS.APIModel.Base;
 using EFS.BusinessLogic.Base;
+using EFS.Common.Authentication;
 using EFS.Common.Global;
 using EFS.DataAccess.Base;
-using EFS.WebAPI.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -17,7 +17,7 @@ namespace EFS.WebAPI.Controllers
         /// <summary>
         /// Gets or sets the token authentication.
         /// </summary>
-        public ITokenAuthentication TokenAuth { get; set; }
+        public ITokenAuthorizationService TokenAuth { get; set; }
 
         /// <summary>
         /// Gets the request token.
@@ -32,10 +32,10 @@ namespace EFS.WebAPI.Controllers
 
         protected readonly AppConfigures _options;
 
-        public BaseController(IOptions<AppConfigures> optionsAccessor)
+        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService)
         {
             _options = optionsAccessor.Value;
-            TokenAuth = new TokenAuthentication();
+            TokenAuth = authenService;
         }
     }
 }

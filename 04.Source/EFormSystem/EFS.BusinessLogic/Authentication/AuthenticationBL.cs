@@ -6,21 +6,18 @@ using System.Text;
 using EFS.Common.Global;
 using AutoMapper;
 using EFS.Model.Users;
-using EFS.APIModel.Authentication;
 using EFS.DataAccess.Users;
-using EFS.Common.Encryption;
+using EFS.APIModel.Authentication;
 
 namespace EFS.BusinessLogic.Authentication
 {
     public class AuthenticationBL : BaseBusinessLogic<UserItem>
     {
         private readonly IUserRepository _useRepository;
-        private readonly IEncryptionService _encryptionService;
 
-        public AuthenticationBL(AppConfigures configs, IEncryptionService encryptionService) : base(configs)
+        public AuthenticationBL(AppConfigures configs) : base(configs)
         {
             _useRepository = new UserRepository(configs.ConnectionString);
-            _encryptionService = encryptionService;
         }
 
         protected override void RegisterMapper()
@@ -43,7 +40,7 @@ namespace EFS.BusinessLogic.Authentication
             {
                 user = _useRepository.Insert(new User() {
                     Username = item.Username,
-                    Password = _encryptionService.Encrypt(item.Password),
+                    Password = Common.Helper.EncryptionHelper.Encrypt(item.Password),
                 });                
             }
 
@@ -52,7 +49,7 @@ namespace EFS.BusinessLogic.Authentication
 
         public AuthenticationItem Login(AuthenticationItem item)
         {
-            var encryptedPass = _encryptionService.Encrypt(item.Password);
+            var encryptedPass = Common.Helper.EncryptionHelper.Encrypt(item.Password);
             var user = _useRepository.FindByNamePass(item.Username, encryptedPass);
 
             if (user != null)

@@ -4,14 +4,14 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace EFS.Common.Encryption
+namespace EFS.Common.Helper
 {
     /// <summary>
     /// The default encryption service.
     /// </summary>
-    public class EncryptionService : IEncryptionService
+    public static class EncryptionHelper
     {
-        public byte[] Encrypt(string plainText)
+        public static byte[] Encrypt(string plainText)
         {
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
@@ -48,7 +48,7 @@ namespace EFS.Common.Encryption
 
         }
 
-        public string Decrypt(byte[] cipherText)
+        public static string Decrypt(byte[] cipherText)
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)

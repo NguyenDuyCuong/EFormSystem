@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using EFS.Common.Encryption;
 using EFS.DataAccess.Base;
 using EFS.Model.Users;
 using System;

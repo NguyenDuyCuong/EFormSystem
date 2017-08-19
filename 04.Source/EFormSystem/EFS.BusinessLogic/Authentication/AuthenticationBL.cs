@@ -40,7 +40,7 @@ namespace EFS.BusinessLogic.Authentication
             {
                 user = _useRepository.Insert(new User() {
                     Username = item.Username,
-                    Password = Common.Helper.EncryptionHelper.Encrypt(item.Password),
+                    Password = Common.Helper.EncryptionHelper.Encrypt(item.Password, _options.Crypto.key, _options.Crypto.iv),
                 });                
             }
 
@@ -49,7 +49,7 @@ namespace EFS.BusinessLogic.Authentication
 
         public AuthenticationItem Login(AuthenticationItem item)
         {
-            var encryptedPass = Common.Helper.EncryptionHelper.Encrypt(item.Password);
+            var encryptedPass = Common.Helper.EncryptionHelper.Encrypt(item.Password, _options.Crypto.key, _options.Crypto.iv);
             var user = _useRepository.FindByNamePass(item.Username, encryptedPass);
 
             if (user != null)

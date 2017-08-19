@@ -11,7 +11,7 @@ namespace EFS.Common.Helper
     /// </summary>
     public static class EncryptionHelper
     {
-        public static byte[] Encrypt(string plainText)
+        public static byte[] Encrypt(string plainText, string key, string iv)
         {
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
@@ -21,8 +21,8 @@ namespace EFS.Common.Helper
             // with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Encoding.ASCII.GetBytes(Global.AppConsts.SecretKey);
-                aesAlg.IV = Encoding.ASCII.GetBytes(Global.AppConsts.IV);
+                aesAlg.Key = Encoding.ASCII.GetBytes(key);
+                aesAlg.IV = Encoding.ASCII.GetBytes(iv);
 
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
@@ -48,7 +48,7 @@ namespace EFS.Common.Helper
 
         }
 
-        public static string Decrypt(byte[] cipherText)
+        public static string Decrypt(byte[] cipherText, string key, string iv)
         {
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
@@ -62,8 +62,8 @@ namespace EFS.Common.Helper
             // with the specified key and IV.
             using (Aes aesAlg = Aes.Create())
             {
-                aesAlg.Key = Encoding.ASCII.GetBytes(Global.AppConsts.SecretKey);
-                aesAlg.IV = Encoding.ASCII.GetBytes(Global.AppConsts.IV);
+                aesAlg.Key = Encoding.ASCII.GetBytes(key);
+                aesAlg.IV = Encoding.ASCII.GetBytes(iv);
 
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);

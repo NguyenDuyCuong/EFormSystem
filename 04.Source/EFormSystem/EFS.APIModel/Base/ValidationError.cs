@@ -26,7 +26,7 @@ namespace EFS.APIModel.Base
         /// </value>
         public string Message { get; set; }
 
-        public ValidationErrorType ErrorType { get; set; }
+        public ValidationErrorTypes ErrorType { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationError"/> class.
@@ -41,10 +41,10 @@ namespace EFS.APIModel.Base
         {
             this.PropertyName = propertyName;
             this.Message = message;
-            this.ErrorType = ValidationErrorType.UnHandleError;
+            this.ErrorType = ValidationErrorTypes.UnHandleError;
         }
 
-        public ValidationError(string propertyName, string message, ValidationErrorType errType)
+        public ValidationError(string propertyName, string message, ValidationErrorTypes errType)
         {
             this.PropertyName = propertyName;
             this.Message = message;

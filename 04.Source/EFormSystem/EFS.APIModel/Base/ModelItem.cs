@@ -46,7 +46,7 @@ namespace EFS.APIModel.Base
 
         public virtual void SetLogicError(string propName, string msg)
         {
-            _validationErrors.Add(new ValidationError(propName, msg, Common.Global.ValidationErrorType.LogicError));
+            _validationErrors.Add(new ValidationError(propName, msg, Common.Global.ValidationErrorTypes.LogicError));
         }
     }
 }

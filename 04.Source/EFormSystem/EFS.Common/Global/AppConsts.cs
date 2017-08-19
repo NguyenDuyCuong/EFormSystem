@@ -6,7 +6,6 @@ namespace EFS.Common.Global
 {
     public class AppConsts
     {
-        public const string SecretKey = "E-Form System: easy secret key!.";
-        public const string IV = "E-Form System iv";
+        public const string Hello = "Wellcome to EFS!";
     }
 }

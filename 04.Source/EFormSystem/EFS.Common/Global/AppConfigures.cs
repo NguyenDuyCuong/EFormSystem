@@ -16,6 +16,8 @@ namespace EFS.Common.Global
     {
         public string ConnectionString { get; set; }
 
+        public int ExpirationMinutes { get; set; }
+
         public CryptoParam Crypto { get; set; }
     }
 }

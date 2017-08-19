@@ -18,18 +18,6 @@ namespace EFS.WebAPI.Controllers
         /// Gets or sets the token authentication.
         /// </summary>
         public ITokenAuthorizationService TokenAuth { get; set; }
-
-        /// <summary>
-        /// Gets the request token.
-        /// </summary>
-        public string RequestToken
-        {
-            get
-            {
-                return HttpContext.Request.Headers["Authorization"];
-            }
-        }
-
         protected readonly AppConfigures _options;
 
         public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService)

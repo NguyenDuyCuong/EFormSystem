@@ -8,6 +8,7 @@ using AutoMapper;
 using EFS.Model.Users;
 using EFS.DataAccess.Users;
 using EFS.APIModel.Authentication;
+using EFS.Common.Authentication;
 
 namespace EFS.BusinessLogic.Authentication
 {
@@ -45,6 +46,13 @@ namespace EFS.BusinessLogic.Authentication
             }
 
             return item;
+        }
+
+        public UserItem CheckUserToken(Certificatate clientToken)
+        {
+            var user = _useRepository.FindByNamePass();
+
+            return AutoMapper.Mapper.Map<UserItem>(user);
         }
 
         public AuthenticationItem Login(AuthenticationItem item)

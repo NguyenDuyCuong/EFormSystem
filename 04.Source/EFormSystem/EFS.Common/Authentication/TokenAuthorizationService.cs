@@ -22,12 +22,11 @@ namespace EFS.Common.Authentication
             get; private set;
         }
 
-        protected readonly AppConfigures _options;
+        private AppConfigures _options;
 
-        public TokenAuthorizationService(AppConfigures options)
+        public void InitParams(AppConfigures config)
         {
-            // HACK: something wrong here
-            _options = options;
+            _options = config;
         }
 
         public string GenerateToken(string username, string password, string ip, string userAgent, long ticks)
@@ -47,43 +46,45 @@ namespace EFS.Common.Authentication
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Join(":", hashLeft, hashRight)));
         }
         
-        public bool IsTokenValid(string token, string ip, string userAgent)
+        public bool IsTokenValid(string token, string ip, string userAgent, Func<string, bool> funcCheckUser)
         {
             bool result = false;
 
             if (!String.IsNullOrEmpty(token) && !IsExpired(token))
             {
-                var _expirationMinutes = _options.ExpirationMinutes;
-                // Base64 decode the string, obtaining the token:username:timeStamp.
-                string key = Encoding.UTF8.GetString(Convert.FromBase64String(token));
-                // Split the parts.
-                string[] parts = key.Split(new char[] { ':' });
-                if (parts.Length == 3)
-                {
-                    // Get the hash message, username, and timestamp.
-                    string hash = parts[0];
-                    string username = parts[1];
-                    long ticks = long.Parse(parts[2]);
-                    DateTime timeStamp = new DateTime(ticks);
-                    // Ensure the timestamp is valid.
-                    bool expired = Math.Abs((DateTime.UtcNow - timeStamp).TotalMinutes) > _expirationMinutes;
-                    if (!expired)
-                    {
-                        //
-                        // Lookup the user's account from the db.
-                        //
-                        if (username == "john")
-                        {
-                            string password = "password";
-                            // Hash the message with the key to generate a token.
-                            string computedToken = GenerateToken(username, password, ip, userAgent, ticks);
-                            // Compare the computed token with the one supplied and ensure they match.
-                            result = (token == computedToken);
-                        }
-                    }
-                }
-            }                
-            
+                //var _expirationMinutes = _options.ExpirationMinutes;
+                //// Base64 decode the string, obtaining the token:username:timeStamp.
+                //string key = Encoding.UTF8.GetString(Convert.FromBase64String(token));
+                //// Split the parts.
+                //string[] parts = key.Split(new char[] { ':' });
+                //if (parts.Length == 3)
+                //{
+                //    // Get the hash message, username, and timestamp.
+                //    string hash = parts[0];
+                //    string username = parts[1];
+                //    long ticks = long.Parse(parts[2]);
+                //    DateTime timeStamp = new DateTime(ticks);
+                //    // Ensure the timestamp is valid.
+                //    bool expired = Math.Abs((DateTime.UtcNow - timeStamp).TotalMinutes) > _expirationMinutes;
+                //    if (!expired)
+                //    {
+                //        //
+                //        // Lookup the user's account from the db.
+                //        //
+                //        if (username == "john")
+                //        {
+                //            string password = "password";
+                //            // Hash the message with the key to generate a token.
+                //            string computedToken = GenerateToken(username, password, ip, userAgent, ticks);
+                //            // Compare the computed token with the one supplied and ensure they match.
+                //            result = (token == computedToken);
+                //        }
+                //    }
+                //}
+
+                result = funcCheckUser(token);
+            }
+
             return result;
         }
 

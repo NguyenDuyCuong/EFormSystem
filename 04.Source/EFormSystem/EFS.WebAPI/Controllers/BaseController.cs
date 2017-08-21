@@ -1,4 +1,5 @@
 ﻿using EFS.APIModel.Base;
+using EFS.BusinessLogic.Authentication;
 using EFS.BusinessLogic.Base;
 using EFS.Common.Authentication;
 using EFS.Common.Global;
@@ -18,12 +19,23 @@ namespace EFS.WebAPI.Controllers
         /// Gets or sets the token authentication.
         /// </summary>
         public ITokenAuthorizationService TokenAuth { get; set; }
+        private readonly AuthenticationBL _authBL;
+
         protected readonly AppConfigures _options;
 
         public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService)
         {
             _options = optionsAccessor.Value;
+
+            authenService.InitParams(_options);
             TokenAuth = authenService;
+
+            _authBL = new AuthenticationBL(_options);
+        }
+        
+        public bool CheckUserToken(string token)
+        {
+            return false;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace EFS.WebAPI
                     .AllowCredentials());
             });
 
-            services.AddSingleton<ITokenAuthorizationService>(new TokenAuthorizationService(Configuration.GetValue<AppConfigures>("appsetting")));
+            services.AddSingleton<ITokenAuthorizationService, TokenAuthorizationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

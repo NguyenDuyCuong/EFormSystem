@@ -32,7 +32,7 @@ namespace EFS.WebAPI.Filters
 
                 var controller = (BaseController)actionContext.Controller;
                 
-                if (controller.TokenAuth.IsTokenValid(token, remoteIpAddress, agent))
+                if (controller.TokenAuth.IsTokenValid(token, remoteIpAddress, agent, (t) => controller.CheckUserToken(t)))
                 {
                     base.OnActionExecuting(actionContext);
                 }

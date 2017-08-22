@@ -67,6 +67,8 @@ namespace EFS.DataAccess.Base
             using (IDbConnection cn = Connection)
             {
                 item.Id = Guid.NewGuid();
+                item.CreatedDate = DateTime.Now;
+
                 cn.Open();
                 cn.Insert<T>(item);
 

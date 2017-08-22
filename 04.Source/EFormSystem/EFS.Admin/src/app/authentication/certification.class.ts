@@ -1,24 +1,26 @@
-import {Helper} from '../shared/sys/app-helper';
+import {Helper} from '../shared/sys/app-helper';   
+import { AppConstants } from '../shared/sys/app-constants';
 
 export class Certification {
     username: string;
-    password: string;
+    key: string;
     token: string;
     ip: string;
     ticks: number;
     useragent: string;
 
     constructor( data: any ){ 
-        this.username = data.username;
-        this.password = data.password;
+        if (data.username)
+            this.username = data.username;        
+        if(data.key)
+            this.key = data.key;
         if (data.token)
             this.token = data.token;
-        if (data.loginDate){
-            this.loginDate = new Date(data.loginDate);
-        }
-        if (data.status)
-            this.status = data.status;        
-
-        this.createdDate = Date.now();
+        if (data.ip)
+            this.ip = data.ip;
+        if (data.ticks)
+            this.ticks = data.ticks;        
+        if (data.useragent)
+            this.useragent = data.useragent;
     };
 }

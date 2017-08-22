@@ -9,6 +9,7 @@ using EFS.Model.Users;
 using EFS.DataAccess.Users;
 using EFS.APIModel.Authentication;
 using EFS.Common.Authentication;
+using EFS.Common.Exceptions;
 
 namespace EFS.BusinessLogic.Authentication
 {
@@ -30,54 +31,54 @@ namespace EFS.BusinessLogic.Authentication
             });
         }
 
-        public AuthenticationItem Register(AuthenticationItem item)
+        public bool Register(Credential item)
         {
-            var user = _useRepository.FindByUsername(item.Username);
+            var user = _useRepository.FindByUsername(item.UserName);
             if (user != null)
             {
-                item.SetLogicError("Register", "UserName have been registed");
+                throw new BussinessException("User have been registed!", this.ToString(), Common.Helper.ConvertHelper.ConvertToJsonString(item));
             }
             else
             {
                 user = _useRepository.Insert(new AppUser() {
-                    UserName = item.Username,
-                    PasswordHash = Common.Helper.EncryptionHelper.Encrypt(item.Password, _options.Crypto.key, _options.Crypto.iv),
-                });                
-            }
+                    UserName = item.UserName,
+                    PasswordHash = item.Key,
+                    Email = item.UserName,
+                });
 
-            return item;
+                return true;
+            }
         }
 
-        public bool ValideUserToken(Certificatate clientToken)
+        public bool ValideUserToken(Credential clientToken)
         {
             var user = _useRepository.FindByNameToken(clientToken.UserName, clientToken.Token);
             if (user == null)
                 return false;
 
-            var serverToken = new Certificatate(user.Token);
+            var serverToken = new Credential(user.Token);
             if (serverToken.IsExpired(_options.ExpirationMinutes))
                 return false;
 
             return serverToken.Token == clientToken.Token;
         }
 
-        public AuthenticationItem Login(AuthenticationItem item)
+        public bool Login(Credential item)
         {
-            var encryptedPass = Common.Helper.EncryptionHelper.Encrypt(item.Password, _options.Crypto.key, _options.Crypto.iv);
-            var user = _useRepository.FindByNamePass(item.Username, encryptedPass);
+            var result = false;
+            var user = _useRepository.FindByNamePass(item.UserName, item.Key);
 
             if (user != null)
             {
-                item.LoginDate = DateTime.Now;
-                item.Status = (int)AuthStatus.Login;
+                user.Token = item.Token;
+                user.LastLogin = DateTime.Now;
+                
+                _useRepository.Update(user);
 
-                return item;
+                result = true;
             }
 
-            item.Status = (int)AuthStatus.Fail;
-            item.SetLogicError("Login", "Wrong username or password!");
-
-            return item;
+            return result;
         }
     }
 }

@@ -30,23 +30,22 @@ namespace EFS.WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]AuthenticationItem item)
+        public IActionResult Login([FromBody]Credential item)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             try
             {
-                var user = _authBL.Login(item);
+                var isLoged = _authBL.Login(item);
 
-                if (user.IsValid)
+                if (isLoged)
                 {
-                    //item.Token = TokenAuth.GenerateToken(user);
                     return Ok(item);
                 }
                 else
                 {
-                    return StatusCode(500, item.ValidationErrors);
+                    return StatusCode(403, item);
                 }
             }
             catch (Exception ex)
@@ -56,24 +55,35 @@ namespace EFS.WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromBody]AuthenticationItem item)
+        public IActionResult Register([FromBody]Credential item)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             try
             {
-                var user = _authBL.Register(item);
+                var isRegisted = _authBL.Register(item);
 
-                if (user.IsValid)
-                    return Ok(user);
+                if (isRegisted)
+                    return Ok(item);
                 else
-                    return StatusCode(500, user.ValidationErrors);
+                    return StatusCode(500, item);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex);
             }
+        }
+
+        [HttpGet]
+        public IActionResult GetIp()
+        {
+            var ip = this.HttpContext.Request.Headers["X-Forwarded-For"]; // AWS compatibility
+            if (string.IsNullOrEmpty(ip))
+            {
+                ip = this.HttpContext.Request.Host.ToUriComponent();
+            }
+            return Json(ip);
         }
     }
 }

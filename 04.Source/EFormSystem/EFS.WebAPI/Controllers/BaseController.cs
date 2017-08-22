@@ -33,7 +33,7 @@ namespace EFS.WebAPI.Controllers
             _authBL = new AuthenticationBL(_options);
         }
         
-        public bool CheckUserToken(Certificatate clientToken)
+        public bool CheckUserToken(Credential clientToken)
         {
             return _authBL.ValideUserToken(clientToken);
         }

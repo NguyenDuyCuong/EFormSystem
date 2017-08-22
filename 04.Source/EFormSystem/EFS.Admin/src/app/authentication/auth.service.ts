@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
+import * as CryptoJS from 'crypto-js';
 
 import * as util from 'util';
 import { Helper } from '../shared/sys/app-helper';
@@ -17,21 +18,70 @@ import { Certification } from './certification.class';
 @Injectable()
 export class AuthService {
   authInfo: Certification;
+  clientIp: string;
   
   // store the URL so we can redirect after logging in
   redirectUrl: string;
   urlsAPI = {
     login: '',
-    register: ''
+    register: '',
+    ip: ''
   };
 
   constructor(private http: HttpClient) { 
-    this.urlsAPI.login = AppConstants.ROOT_URI + '/Authentication/Login';
-    this.urlsAPI.register = AppConstants.ROOT_URI + '/Authentication/Register';
+    this.DeclareUrlAPI();
+    this.getIp();
   }
 
+  private DeclareUrlAPI = function () {
+    this.urlsAPI.login = AppConstants.ROOT_URI + '/Authentication/Login';
+    this.urlsAPI.register = AppConstants.ROOT_URI + '/Authentication/Register';
+    this.urlsAPI.ip = AppConstants.ROOT_URI + '/Authentication/GetIp';
+  }
+
+  generate = function (username, password) {
+    if (username && password) {
+        // If the user is providing credentials, then create a new key.
+        this.logout();
+    }
+    
+    this.authInfo = new Certification({});
+    // Set the username.
+    this.authInfo.username = this.authInfo.username || username;
+    // Set the key to a hash of the user's password + salt.
+    this.authInfo.key = this.authInfo.key || CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA256([password, AppConstants.Secret_Salt].join(':'), AppConstants.Secret_Salt));
+    // Set the client IP address.
+    this.authInfo.ip = this.authInfo.ip || this.clientIp;
+   
+    // Get the (C# compatible) ticks to use as a timestamp. http://stackoverflow.com/a/7968483/2596404
+    var ticks = ((new Date().getTime() * 10000) + 621355968000000000);
+    // Construct the hash body by concatenating the username, ip, and userAgent.
+    var message = [this.authInfo.username, this.authInfo.ip, navigator.userAgent.replace(/ \.NET.+;/, ''), ticks].join(':');
+    // Hash the body, using the key.
+    var hash = CryptoJS.HmacSHA256(message, this.authInfo.key);
+    // Base64-encode the hash to get the resulting token.
+    var token = CryptoJS.enc.Base64.stringify(hash);
+    // Include the username and timestamp on the end of the token, so the server can validate.
+    var tokenId = [this.authInfo.username, ticks].join(':');
+    // Base64-encode the final resulting token.
+    var tokenStr = CryptoJS.enc.Utf8.parse([token, tokenId].join(':'));
+    this.authInfo.token = CryptoJS.enc.Base64.stringify(tokenStr);
+    return this.authInfo.token;
+  }
+
+  private getIp = function () {
+    Helper.InvokeAPI(this.urlsAPI.ip, 'get', '', this.http)
+    .subscribe(resp => {
+      this.clientIp = resp[0];
+    },
+    error => {
+      console.log(error.message);
+    });
+}
+
   login(username:string, password:string, successCallback, failCallback): void {
-    this.authInfo = new Certification({username: username, password: password});
+    this.generate(username, password);
+
     var body = JSON.stringify(this.authInfo);
     Helper.InvokeAPIFull(this.urlsAPI.login, 'post', body, this.http)
       .subscribe(resp => {
@@ -48,14 +98,12 @@ export class AuthService {
   }
 
   logout(): void {
-    this.authInfo.status = AuthStatus.Logout; 
-    this.authInfo.token = '';
-
-    localStorage.setItem('AuthInfo', JSON.stringify(this.authInfo));
+    this.authInfo = new Certification({}); 
+    localStorage.removeItem('AuthInfo');
   }
 
   get IsLogin() {
-    return this.authInfo != null && this.authInfo.status == AuthStatus.Login;
+    return this.authInfo != null && this.authInfo.token === '';
   }
 
   Vertify(): boolean {
@@ -69,21 +117,15 @@ export class AuthService {
       }
     }    
 
-    if (this.authInfo == null || this.authInfo.status !== AuthStatus.Login || this.authInfo.token === '')
+    if (this.authInfo == null || this.authInfo.token === '')
       return false;
-
-
-    if(this.authInfo.status == AuthStatus.Login){
-      var today = new Date();
-      if(today.getHours() - this.authInfo.loginDate.getHours() <= 24)
-        return true;
-    }
 
     return false;
   }
 
   register(username:string, password:string, successCallback, failCallback): void {
-    this.authInfo = new Certification({username: username, password: password});
+    this.generate(username, password);
+
     var body = JSON.stringify(this.authInfo);
     Helper.InvokeAPIFull(this.urlsAPI.register, 'post', body, this.http)
       .subscribe(resp => {
@@ -108,60 +150,4 @@ export class AuthService {
         
       });
   }
-
-  SecurityManager () {
-    salt: 'rz8LuOtFBXphj9WQfvFh', // Generated at https://www.random.org/strings
-    username: localStorage['SecurityManager.username'],
-    key: localStorage['SecurityManager.key'],
-    ip: null,
-    generate: function (username, password) {
-        if (username && password) {
-            // If the user is providing credentials, then create a new key.
-            SecurityManager.logout();
-        }
-        // Set the username.
-        SecurityManager.username = SecurityManager.username || username;
-        // Set the key to a hash of the user's password + salt.
-        SecurityManager.key = SecurityManager.key || CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA256([password, SecurityManager.salt].join(':'), SecurityManager.salt));
-        // Set the client IP address.
-        SecurityManager.ip = SecurityManager.ip || SecurityManager.getIp();
-        // Persist key pieces.
-        if (SecurityManager.username) {
-            localStorage['SecurityManager.username'] = SecurityManager.username;
-            localStorage['SecurityManager.key'] = SecurityManager.key;
-        }
-        // Get the (C# compatible) ticks to use as a timestamp. http://stackoverflow.com/a/7968483/2596404
-        var ticks = ((new Date().getTime() * 10000) + 621355968000000000);
-        // Construct the hash body by concatenating the username, ip, and userAgent.
-        var message = [SecurityManager.username, SecurityManager.ip, navigator.userAgent.replace(/ \.NET.+;/, ''), ticks].join(':');
-        // Hash the body, using the key.
-        var hash = CryptoJS.HmacSHA256(message, SecurityManager.key);
-        // Base64-encode the hash to get the resulting token.
-        var token = CryptoJS.enc.Base64.stringify(hash);
-        // Include the username and timestamp on the end of the token, so the server can validate.
-        var tokenId = [SecurityManager.username, ticks].join(':');
-        // Base64-encode the final resulting token.
-        var tokenStr = CryptoJS.enc.Utf8.parse([token, tokenId].join(':'));
-        return CryptoJS.enc.Base64.stringify(tokenStr);
-    },
-    logout: function () {
-        SecurityManager.ip = null;
-        localStorage.removeItem('SecurityManager.username');
-        SecurityManager.username = null;
-        localStorage.removeItem('SecurityManager.key');
-        SecurityManager.key = null;
-    },
-    getIp: function () {
-        var result = '';
-        $.ajax({
-            url: '/ip',
-            method: 'GET',
-            async: false,
-            success: function (ip) {
-                result = ip;
-            }
-        });
-        return result;
-    }
-} 
 }

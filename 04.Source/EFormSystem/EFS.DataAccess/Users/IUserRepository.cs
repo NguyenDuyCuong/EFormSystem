@@ -12,7 +12,7 @@ namespace EFS.DataAccess.Users
     public interface IUserRepository : IRepository<AppUser>
     {
         AppUser FindByUsername(string username);
-        AppUser FindByNamePass(string username, byte[] password);
+        AppUser FindByNamePass(string username, string password);
         AppUser FindByNameToken(string userName, string token);
     }
 }

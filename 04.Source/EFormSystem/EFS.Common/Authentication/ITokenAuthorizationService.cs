@@ -16,9 +16,9 @@ namespace EFS.Common.Authentication
         /// <summary>
         /// Gets the token.
         /// </summary>
-        Certificatate Token { get; }
+        Credential Token { get; }
 
-        bool IsTokenValid(string token, string ip, string userAgent, Func<Certificatate, bool> funcCheckUser);
+        bool IsTokenValid(string token, string ip, string userAgent, Func<Credential, bool> funcCheckUser);
 
         void InitParams(AppConfigures config);
     }

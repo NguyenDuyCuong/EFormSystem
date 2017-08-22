@@ -10,6 +10,6 @@ namespace EFS.Model.Base
     /// </summary>
     public abstract class EntityBase 
     {
-        
+        public abstract DateTime CreatedDate { get; set; }
     }
 }

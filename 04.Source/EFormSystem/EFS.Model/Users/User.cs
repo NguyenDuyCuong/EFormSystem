@@ -30,5 +30,6 @@ namespace EFS.Model.Users
         public string Username { get; set; }
         
         public byte[] Password { get; set; }
+        public override DateTime CreatedDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

@@ -30,9 +30,9 @@ namespace EFS.DataAccess.Users
             return FindSingle("SELECT * FROM AppUser WHERE Username=@Username", new { Username = username });
         }
 
-        public AppUser FindByNamePass(string username, byte[] password)
+        public AppUser FindByNamePass(string username, string password)
         {
-            return FindSingle("SELECT * FROM AppUser WHERE Username=@Username AND Password=@Pass", new { Username = username, Pass = password });
+            return FindSingle("SELECT * FROM AppUser WHERE Username=@Username AND PasswordHash=@Pass", new { Username = username, Pass = password });
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace EFS.DataAccess.Users
         public AppUser FindByAuthToken(string authenticationToken)
         {
             // TODO: Add real implementation. This is a stub
-            return FindSingle("SELECT TOP 1 * FROM [User]", new { AuthToken = authenticationToken });
+            return FindSingle("SELECT TOP 1 * FROM AppUser", new { AuthToken = authenticationToken });
         }
 
         public AppUser FindByNameToken(string userName, string token)

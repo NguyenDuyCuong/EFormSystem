@@ -17,7 +17,7 @@ namespace EFS.Common.Authentication
     /// </summary>
     public class TokenAuthorizationService : ITokenAuthorizationService
     {
-        public Certificatate Token
+        public Credential Token
         {
             get; private set;
         }
@@ -29,14 +29,14 @@ namespace EFS.Common.Authentication
             _options = config;
         }
                 
-        public bool IsTokenValid(string token, string ip, string userAgent, Func<Certificatate, bool> funcCheckUser)
+        public bool IsTokenValid(string token, string ip, string userAgent, Func<Credential, bool> funcCheckUser)
         {
             bool result = false;
 
             if (!String.IsNullOrEmpty(token))
                 return false;
 
-            var clientCerificate = new Certificatate(token, ip, userAgent);
+            var clientCerificate = new Credential(token, ip, userAgent);
 
             if (!clientCerificate.IsExpired(_options.ExpirationMinutes))
             {

@@ -1,17 +1,19 @@
-﻿using EFS.Model.Base;
+﻿using Dapper.Contrib.Extensions;
+using EFS.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EFS.Model.Users
 {
+    [Table("AppUser")]
     public class AppUser : EntityBase, IAggregateRoot
     {
         public Guid Id { get; set; }
 
         public string Email { get; set; }
 
-        public byte[] PasswordHash { get; set; }
+        public string PasswordHash { get; set; }
 
         public string UserName { get; set; }
 
@@ -21,7 +23,7 @@ namespace EFS.Model.Users
 
         public string Token { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public override DateTime CreatedDate { get; set; }
 
         public Guid? CreatedBy { get; set; }
 

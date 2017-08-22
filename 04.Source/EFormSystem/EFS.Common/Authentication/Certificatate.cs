@@ -1,4 +1,5 @@
 ﻿using EFS.Common.Global;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -6,28 +7,35 @@ using System.Text;
 
 namespace EFS.Common.Authentication
 {
-    public class Certificatate
+    public class Credential
     {
+        [JsonProperty("username")]
         public string UserName { get; set; }
-        public string Password { get; set; }
-
+        [JsonProperty("key")]
+        public string Key { get; set; }
+        [JsonProperty("ip")]
         public string IP { get; set; }
+        [JsonProperty("useragent")]
         public string UserAgent { get; set; }
-
+        [JsonProperty("ticks")]
         public long Ticks { get; set; }
+        [JsonProperty("token")]
+        public string Token { get; set; }
 
-        private string _token;
-        public string Token { get; private set; }
-
-        public Certificatate(string token)
+        public Credential()
         {
-            this._token = token;
+            
+        }
+
+        public Credential(string token)
+        {
+            this.Token = token;
             ExtractToken(token);
         }
 
-        public Certificatate(string token, string ip, string userAgent)
+        public Credential(string token, string ip, string userAgent)
         {
-            this._token = token;
+            this.Token = token;
             this.IP = ip;
             this.UserAgent = userAgent;
             ExtractToken(token);
@@ -60,7 +68,7 @@ namespace EFS.Common.Authentication
             }
         }
 
-        private string GenerateToken()
+        public string GenerateToken()
         {
             var _alg = Encoding.UTF8.GetBytes(AppConsts.SecretKey); //"HmacSHA256";
 
@@ -69,7 +77,7 @@ namespace EFS.Common.Authentication
             string hashRight = "";
             using (HMAC hmac = new HMACSHA256(_alg))
             {
-                hmac.Key = Encoding.UTF8.GetBytes(GetHashedPassword(this.Password));
+                hmac.Key = Encoding.UTF8.GetBytes(GetHashedPassword(this.Key));
                 var outHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(hash));
                 hashLeft = Convert.ToBase64String(outHash);
                 hashRight = string.Join(":", new string[] { this.UserName, this.Ticks.ToString() });

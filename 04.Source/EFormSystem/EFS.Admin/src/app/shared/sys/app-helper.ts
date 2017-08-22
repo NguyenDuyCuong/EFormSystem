@@ -1,11 +1,12 @@
 import * as CryptoJS from 'crypto-js';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { AppConstants } from './app-constants';
 
 export class Helper{
     static Encrypt(message:string, key:string) {
         //var keyHex = CryptoJS.enc.Utf8.parse(key);
-        //var encrypted = CryptoJS.DES.encrypt(message, key, {mode: CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});        
-        var encrypted = CryptoJS.AES.encrypt(message, "Secret Passphrase");
+        //var encrypted = CryptoJS.DES.encrypt(message, key, {mode: CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});                
+        var encrypted = CryptoJS.enc.Base64.stringify(message, key);
         
         return encrypted;
     }

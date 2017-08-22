@@ -27,7 +27,11 @@ namespace EFS.WebAPI.Filters
             try
             {
                 string token = actionContext.HttpContext.Request.Headers["Authorization"];
-                var remoteIpAddress = actionContext.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+                var remoteIpAddress = actionContext.HttpContext.Request.Headers["X-Forwarded-For"];
+                if (String.IsNullOrEmpty(remoteIpAddress))
+                {
+                    remoteIpAddress = actionContext.HttpContext.Request.Host.Host;
+                }
                 var agent = actionContext.HttpContext.Request.Headers["User-Agent"].ToString();
 
                 var controller = (BaseController)actionContext.Controller;

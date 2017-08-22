@@ -35,7 +35,7 @@ namespace EFS.WebAPI.Controllers
         
         public bool CheckUserToken(Certificatate clientToken)
         {
-            return _authBL.CheckUserToken(clientToken);
+            return _authBL.ValideUserToken(clientToken);
         }
     }
 }

@@ -39,20 +39,26 @@ namespace EFS.BusinessLogic.Authentication
             }
             else
             {
-                user = _useRepository.Insert(new User() {
-                    Username = item.Username,
-                    Password = Common.Helper.EncryptionHelper.Encrypt(item.Password, _options.Crypto.key, _options.Crypto.iv),
+                user = _useRepository.Insert(new AppUser() {
+                    UserName = item.Username,
+                    PasswordHash = Common.Helper.EncryptionHelper.Encrypt(item.Password, _options.Crypto.key, _options.Crypto.iv),
                 });                
             }
 
             return item;
         }
 
-        public UserItem CheckUserToken(Certificatate clientToken)
+        public bool ValideUserToken(Certificatate clientToken)
         {
-            var user = _useRepository.FindByNamePass();
+            var user = _useRepository.FindByNameToken(clientToken.UserName, clientToken.Token);
+            if (user == null)
+                return false;
 
-            return AutoMapper.Mapper.Map<UserItem>(user);
+            var serverToken = new Certificatate(user.Token);
+            if (serverToken.IsExpired(_options.ExpirationMinutes))
+                return false;
+
+            return serverToken.Token == clientToken.Token;
         }
 
         public AuthenticationItem Login(AuthenticationItem item)

@@ -21,7 +21,7 @@ namespace EFS.DataAccess.Base
         {
             get { return new SqlConnection(ConnectionString); }
         }
-
+        
         public BaseRepository(string strConnection)
         {
             ConnectionString = strConnection;
@@ -66,11 +66,11 @@ namespace EFS.DataAccess.Base
         public virtual T Insert(T item) {
             using (IDbConnection cn = Connection)
             {
-                item.ID = Guid.NewGuid();
+                item.Id = Guid.NewGuid();
                 cn.Open();
                 cn.Insert<T>(item);
 
-                return cn.Get<T>(item.ID);
+                return cn.Get<T>(item.Id);
             }
         }
 

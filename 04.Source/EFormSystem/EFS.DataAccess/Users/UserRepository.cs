@@ -9,7 +9,7 @@ using System.Text;
 
 namespace EFS.DataAccess.Users
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<AppUser>, IUserRepository
     {
         public UserRepository(string strConnection) : base(strConnection)
         {
@@ -25,14 +25,14 @@ namespace EFS.DataAccess.Users
         /// <returns>
         /// The <see cref="User"/>.
         /// </returns>
-        public User FindByUsername(string username)
+        public AppUser FindByUsername(string username)
         {
-            return FindSingle("SELECT * FROM [User] WHERE Username=@Username", new { Username = username });
+            return FindSingle("SELECT * FROM AppUser WHERE Username=@Username", new { Username = username });
         }
 
-        public User FindByNamePass(string username, byte[] password)
+        public AppUser FindByNamePass(string username, byte[] password)
         {
-            return FindSingle("SELECT * FROM [User] WHERE Username=@Username AND Password=@Pass", new { Username = username, Pass = password });
+            return FindSingle("SELECT * FROM AppUser WHERE Username=@Username AND Password=@Pass", new { Username = username, Pass = password });
         }
 
         /// <summary>
@@ -42,10 +42,15 @@ namespace EFS.DataAccess.Users
         /// <returns>
         /// The <see cref="User"/>.
         /// </returns>
-        public User FindByAuthToken(string authenticationToken)
+        public AppUser FindByAuthToken(string authenticationToken)
         {
             // TODO: Add real implementation. This is a stub
             return FindSingle("SELECT TOP 1 * FROM [User]", new { AuthToken = authenticationToken });
+        }
+
+        public AppUser FindByNameToken(string userName, string token)
+        {
+            return FindSingle("Select Top 1 * from AppUser where UserName=@UserName and Token=@Token", new { UserName = userName, Token = token });
         }
     }
 }

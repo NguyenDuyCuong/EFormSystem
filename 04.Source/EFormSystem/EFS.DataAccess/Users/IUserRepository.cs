@@ -9,18 +9,10 @@ namespace EFS.DataAccess.Users
     /// <summary>
     /// The UserRepository interface.
     /// </summary>
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<AppUser>
     {
-        /// <summary>
-        /// The find by username.
-        /// </summary>
-        /// <param name="username">
-        /// The username.
-        /// </param>
-        /// <returns>
-        /// The <see cref="User"/>.
-        /// </returns>
-        User FindByUsername(string username);
-        User FindByNamePass(string username, byte[] password);
+        AppUser FindByUsername(string username);
+        AppUser FindByNamePass(string username, byte[] password);
+        AppUser FindByNameToken(string userName, string token);
     }
 }

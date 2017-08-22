@@ -4,9 +4,9 @@ export class Certification {
     username: string;
     password: string;
     token: string;
-    loginDate: Date;
-    status = 0;
-    private createdDate = 0;
+    ip: string;
+    ticks: number;
+    useragent: string;
 
     constructor( data: any ){ 
         this.username = data.username;

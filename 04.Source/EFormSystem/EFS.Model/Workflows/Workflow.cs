@@ -6,7 +6,7 @@ namespace EFS.Model.Workflows
 {
     public class Workflow : Base.EntityBase, Base.IAggregateRoot
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

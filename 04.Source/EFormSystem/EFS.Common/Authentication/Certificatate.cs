@@ -33,11 +33,11 @@ namespace EFS.Common.Authentication
             ExtractToken(token);
         }
 
-        public bool IsExpired(string token, int expirationMinutes)
+        public bool IsExpired(int expirationMinutes)
         {
             var result = true;
-            
-            if (!String.IsNullOrEmpty(token) && Ticks != 0)
+
+            if (!String.IsNullOrEmpty(this.Token) && Ticks != 0)
             {
                 DateTime timeStamp = new DateTime(this.Ticks);
                 result = Math.Abs((DateTime.UtcNow - timeStamp).TotalMinutes) > expirationMinutes;

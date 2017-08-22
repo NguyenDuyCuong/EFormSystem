@@ -19,7 +19,7 @@ namespace EFS.Model.Users
         /// <value>
         /// The ID.
         /// </value>
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or sets the username.

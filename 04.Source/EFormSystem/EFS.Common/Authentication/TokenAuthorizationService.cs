@@ -38,7 +38,7 @@ namespace EFS.Common.Authentication
 
             var clientCerificate = new Certificatate(token, ip, userAgent);
 
-            if (!clientCerificate.IsExpired(token, _options.ExpirationMinutes))
+            if (!clientCerificate.IsExpired(_options.ExpirationMinutes))
             {
                 //var _expirationMinutes = _options.ExpirationMinutes;
                 //// Base64 decode the string, obtaining the token:username:timeStamp.

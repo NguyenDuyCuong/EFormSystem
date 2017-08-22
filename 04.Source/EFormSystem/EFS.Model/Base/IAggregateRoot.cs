@@ -15,6 +15,6 @@ namespace EFS.Model.Base
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
-        Guid ID { get; set; }
+        Guid Id { get; set; }
     }
 }

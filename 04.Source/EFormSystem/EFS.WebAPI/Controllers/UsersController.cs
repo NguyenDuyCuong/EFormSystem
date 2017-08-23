@@ -28,7 +28,7 @@ namespace EFS.WebAPI.Controllers
             _userBL = new UserBL(_options);
         }
         
-        [HttpGet]
+        [HttpPost]
         public IActionResult Test()
         {
             return Ok();

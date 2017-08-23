@@ -33,7 +33,7 @@ namespace EFS.Common.Authentication
         {
             bool result = false;
 
-            if (!String.IsNullOrEmpty(token))
+            if (String.IsNullOrEmpty(token))
                 return false;
 
             var clientCerificate = new Credential(token, ip, userAgent);

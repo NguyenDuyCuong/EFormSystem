@@ -15,8 +15,9 @@ export class LoginComponent {
   username: string;
   password: string;
   formstate = FormState.View;
+
   get IsLogin() { 
-    return this.authService.IsLogin;
+    return this.authService.authInfo;
   }
   get IsCreating(){
     return this.formstate == FormState.Create;

@@ -55,6 +55,7 @@ export class AuthService {
    
     // Get the (C# compatible) ticks to use as a timestamp. http://stackoverflow.com/a/7968483/2596404
     var ticks = ((new Date().getTime() * 10000) + 621355968000000000);
+    this.authInfo.ticks = ticks;
     // Construct the hash body by concatenating the username, ip, and userAgent.
     var message = [this.authInfo.username, this.authInfo.ip, navigator.userAgent.replace(/ \.NET.+;/, ''), ticks].join(':');
     // Hash the body, using the key.
@@ -98,7 +99,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.authInfo = new Certification({}); 
+    this.authInfo = undefined;
     localStorage.removeItem('AuthInfo');
   }
 
@@ -117,8 +118,8 @@ export class AuthService {
       }
     }    
 
-    if (this.authInfo == null || this.authInfo.token === '')
-      return false;
+    if (this.authInfo && this.authInfo.token !== '')
+      return true;
 
     return false;
   }

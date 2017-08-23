@@ -37,6 +37,7 @@ namespace EFS.WebAPI.Controllers
 
             try
             {
+                item.UserAgent = HttpContext.Request.Headers["User-Agent"].ToString();
                 var isLoged = _authBL.Login(item);
 
                 if (isLoged)

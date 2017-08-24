@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using EFS.APIModel.Authentication;
 using EFS.Common.Authentication;
+using Microsoft.Extensions.Logging;
 
 namespace EFS.WebAPI.Controllers
 {
@@ -24,7 +25,8 @@ namespace EFS.WebAPI.Controllers
 
         public AuthenticationController(
             IOptions<AppConfigures> optionsAccessor
-            , ITokenAuthorizationService authenService) : base(optionsAccessor, authenService)
+            , ITokenAuthorizationService authenService
+            , ILoggerFactory loggerFactory) : base(optionsAccessor, authenService, loggerFactory)
         {
             _authBL = new AuthenticationBL(_options);
         }

@@ -5,6 +5,7 @@ using EFS.Common.Authentication;
 using EFS.Common.Global;
 using EFS.DataAccess.Base;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,12 @@ namespace EFS.WebAPI.Controllers
         private readonly AuthenticationBL _authBL;
 
         protected readonly AppConfigures _options;
+        protected readonly ILoggerFactory _loggerFactory;
 
-        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService)
+        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService, ILoggerFactory loggerFactory)
         {
             _options = optionsAccessor.Value;
+            _loggerFactory = loggerFactory;
 
             authenService.InitParams(_options);
             TokenAuth = authenService;

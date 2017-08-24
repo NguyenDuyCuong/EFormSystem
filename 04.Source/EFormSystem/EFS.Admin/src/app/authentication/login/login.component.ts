@@ -3,9 +3,9 @@ import { Router, NavigationExtras } from '@angular/router';
 
 import  { AuthService } from '../auth.service';
 
-import {BaseComponent} from '../../shared/base/base.component';
+import { BaseComponent } from '../../shared/base/base.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {MdDialog} from '@angular/material';
+import { MdDialog, MdSnackBar } from '@angular/material';
 
 import { FormState } from '../../shared/sys/app-enums';
 
@@ -29,8 +29,8 @@ export class LoginComponent extends BaseComponent {
     return this.formstate == FormState.Create;
   }
 
-  constructor(public authService: AuthService, public router: Router, httpClient: HttpClient, dialog: MdDialog) {
-    super(httpClient, dialog);
+  constructor(public authService: AuthService, public router: Router, httpClient: HttpClient, dialog: MdDialog, snackBar: MdSnackBar) {
+    super(httpClient, dialog, snackBar);
   }
 
   login() {
@@ -76,7 +76,7 @@ export class LoginComponent extends BaseComponent {
   }
 
   test(){
-    super.SetMode(FormState.Waiting);
+    super.SetMessage("FormState.Waiting");    
     this.authService.test();
   }
 }

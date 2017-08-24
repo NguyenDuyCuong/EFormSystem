@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using EFS.Common.Global;
 using EFS.Common.Authentication;
+using Microsoft.Extensions.Logging;
 
 namespace EFS.WebAPI.Controllers
 {
     public class WorkflowController : BaseController
     {
-        public WorkflowController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService) : base(optionsAccessor, authenService)
+        public WorkflowController(IOptions<AppConfigures> optionsAccessor
+            , ITokenAuthorizationService authenService
+            , ILoggerFactory loggerFactory) : base(optionsAccessor, authenService, loggerFactory)
         {
         }
 

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using EFS.Common.Authentication;
+using Microsoft.Extensions.Logging;
 
 namespace EFS.WebAPI.Controllers
 {
@@ -23,7 +24,8 @@ namespace EFS.WebAPI.Controllers
 
         public UsersController(
             IOptions<AppConfigures> optionsAccessor
-            , ITokenAuthorizationService authenService) : base(optionsAccessor, authenService)
+            , ITokenAuthorizationService authenService
+            , ILoggerFactory loggerFactory) : base(optionsAccessor, authenService, loggerFactory)
         {
             _userBL = new UserBL(_options);
         }

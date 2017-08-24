@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 
 import  { AuthService } from '../auth.service';
+
+import {BaseComponent} from '../../shared/base/base.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {MdDialog} from '@angular/material';
 
 import { FormState } from '../../shared/sys/app-enums';
 
@@ -9,7 +13,9 @@ import { FormState } from '../../shared/sys/app-enums';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+
+@Injectable()
+export class LoginComponent extends BaseComponent {
   message = '';
 
   username: string;
@@ -23,7 +29,9 @@ export class LoginComponent {
     return this.formstate == FormState.Create;
   }
 
-  constructor(public authService: AuthService, public router: Router) {}
+  constructor(public authService: AuthService, public router: Router, httpClient: HttpClient, dialog: MdDialog) {
+    super(httpClient, dialog);
+  }
 
   login() {
     this.authService.login(this.username, this.password, (data)=>{
@@ -68,6 +76,7 @@ export class LoginComponent {
   }
 
   test(){
+    super.SetMode(FormState.Waiting);
     this.authService.test();
   }
 }

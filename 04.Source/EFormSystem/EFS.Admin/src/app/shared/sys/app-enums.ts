@@ -10,4 +10,5 @@ export enum FormState{
     View = 2,
     Update = 4,
     Delete = 8,
+    Waiting = 16,
 }

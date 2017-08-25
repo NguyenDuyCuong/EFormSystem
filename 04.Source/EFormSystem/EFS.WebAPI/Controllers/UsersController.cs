@@ -27,7 +27,7 @@ namespace EFS.WebAPI.Controllers
             IOptions<AppConfigures> optionsAccessor
             , ITokenAuthorizationService authenService
             , ILoggerFactory loggerFactory
-            , IStringLocalizer localizer) : base(optionsAccessor, authenService, loggerFactory, localizer)
+            , IStringLocalizerFactory localizerFactory) : base(optionsAccessor, authenService, loggerFactory, localizerFactory)
         {
             _userBL = new UserBL(_options);
         }

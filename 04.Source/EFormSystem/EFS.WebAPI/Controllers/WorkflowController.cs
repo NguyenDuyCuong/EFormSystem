@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using EFS.Common.Global;
 using EFS.Common.Authentication;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace EFS.WebAPI.Controllers
 {
@@ -15,7 +16,8 @@ namespace EFS.WebAPI.Controllers
     {
         public WorkflowController(IOptions<AppConfigures> optionsAccessor
             , ITokenAuthorizationService authenService
-            , ILoggerFactory loggerFactory) : base(optionsAccessor, authenService, loggerFactory)
+            , ILoggerFactory loggerFactory
+            , IStringLocalizer localizer) : base(optionsAccessor, authenService, loggerFactory, localizer)
         {
         }
 

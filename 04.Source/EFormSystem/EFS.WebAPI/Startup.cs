@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using EFS.Common.Authentication;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace EFS.WebAPI
 {
@@ -42,8 +45,13 @@ namespace EFS.WebAPI
             services.AddOptions();
             services.Configure<AppConfigures>(Configuration);
 
+            services.AddLocalization(options => options.ResourcesPath = "EFS.Common/Resources");             
+
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -60,6 +68,19 @@ namespace EFS.WebAPI
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddNLog();
+            app.AddNLogWeb();
+
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("vi-VN")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("vi-VN"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseCors("CorsPolicy");
 

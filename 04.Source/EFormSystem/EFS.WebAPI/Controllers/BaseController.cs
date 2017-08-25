@@ -5,6 +5,7 @@ using EFS.Common.Authentication;
 using EFS.Common.Global;
 using EFS.DataAccess.Base;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -23,12 +24,14 @@ namespace EFS.WebAPI.Controllers
         private readonly AuthenticationBL _authBL;
 
         protected readonly AppConfigures _options;
-        protected readonly ILoggerFactory _loggerFactory;
+        protected readonly ILogger _logger;
+        protected readonly IStringLocalizer _localizer;
 
-        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService, ILoggerFactory loggerFactory)
+        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService, ILoggerFactory loggerFactory, IStringLocalizerFactory localizerFactory)
         {
             _options = optionsAccessor.Value;
-            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.CreateLogger(GetType());            
+            _localizer = localizerFactory.Create(GetType());
 
             authenService.InitParams(_options);
             TokenAuth = authenService;

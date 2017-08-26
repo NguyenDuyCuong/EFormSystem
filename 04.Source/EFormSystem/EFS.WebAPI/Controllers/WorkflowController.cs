@@ -16,8 +16,7 @@ namespace EFS.WebAPI.Controllers
     {
         public WorkflowController(IOptions<AppConfigures> optionsAccessor
             , ITokenAuthorizationService authenService
-            , ILoggerFactory loggerFactory
-            , IStringLocalizerFactory localizerFactory) : base(optionsAccessor, authenService, loggerFactory, localizerFactory)
+            , ILoggerFactory loggerFactory) : base(optionsAccessor, authenService, loggerFactory)
         {
         }
 

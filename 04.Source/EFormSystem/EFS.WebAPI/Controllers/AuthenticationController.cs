@@ -16,6 +16,7 @@ using EFS.APIModel.Authentication;
 using EFS.Common.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Localization;
+using System.Reflection;
 
 namespace EFS.WebAPI.Controllers
 {
@@ -27,8 +28,7 @@ namespace EFS.WebAPI.Controllers
         public AuthenticationController(
             IOptions<AppConfigures> optionsAccessor
             , ITokenAuthorizationService authenService
-            , ILoggerFactory loggerFactory
-            , IStringLocalizerFactory localizerFactory) : base(optionsAccessor, authenService, loggerFactory, localizerFactory)
+            , ILoggerFactory loggerFactory) : base(optionsAccessor, authenService, loggerFactory)
         {
             _authBL = new AuthenticationBL(_options);
         }

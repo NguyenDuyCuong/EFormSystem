@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Threading.Tasks;
 
 namespace EFS.WebAPI.Controllers
@@ -25,13 +27,11 @@ namespace EFS.WebAPI.Controllers
 
         protected readonly AppConfigures _options;
         protected readonly ILogger _logger;
-        protected readonly IStringLocalizer _localizer;
 
-        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService, ILoggerFactory loggerFactory, IStringLocalizerFactory localizerFactory)
+        public BaseController(IOptions<AppConfigures> optionsAccessor, ITokenAuthorizationService authenService, ILoggerFactory loggerFactory)
         {
             _options = optionsAccessor.Value;
-            _logger = loggerFactory.CreateLogger(GetType());            
-            _localizer = localizerFactory.Create(GetType());
+            _logger = loggerFactory.CreateLogger(GetType());
 
             authenService.InitParams(_options);
             TokenAuth = authenService;

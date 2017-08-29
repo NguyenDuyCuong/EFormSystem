@@ -51,4 +51,12 @@ if pass then
 ### 1. Codein: Common/Service
 
 ## How to:
-### 1. Create Controller
+### 1. Create Model
+#### 1.1. Use tool GenEntityClass:
+* **GenEntityClass**: is sql script, It will generate class base on table.
+* **Use**: must give name of table:
+    >declare @TableName sysname = '[Name of table]'
+#### 1.2. Implement base model:
+* Add new class in **Core\EFS.Model\\_[Group Function]_**. [Group Function] is folder contain relational classes.
+* The new class have to inherited 2 base classes: **EntityBase**, **IAggregateRoot**
+    > public class CompanyDetail : EntityBase, IAggregateRoot

@@ -1,4 +1,4 @@
-﻿declare @TableName sysname = 'Workflow'
+﻿declare @TableName sysname = 'Company'
 declare @Result varchar(max) = 'public class ' + @TableName + '
 {'
 

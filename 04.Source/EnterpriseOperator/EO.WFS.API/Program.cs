@@ -19,6 +19,7 @@ namespace EO.WFS.API
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()            
                 .UseStartup<Startup>()
                 .Build();
     }

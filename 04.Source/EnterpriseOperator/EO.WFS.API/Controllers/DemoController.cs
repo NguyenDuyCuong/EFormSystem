@@ -10,6 +10,7 @@ using EO.Shared.Global;
 using Microsoft.Extensions.Options;
 using EO.Business.Base;
 using EO.Models.Base;
+using Microsoft.Extensions.Logging;
 
 namespace EO.WFS.API.Controllers
 {
@@ -17,7 +18,8 @@ namespace EO.WFS.API.Controllers
     [Route("api/Demo")]
     public class DemoController : BaseController<IDemoBL>
     {
-        public DemoController(IOptions<AppConfigures> optionsAccessor) : base(optionsAccessor)
+        public DemoController(IOptions<AppConfigures> optionsAccessor
+                                , ILogger<IBusinessLogic> logger) : base(optionsAccessor, logger)
         {
         }
 

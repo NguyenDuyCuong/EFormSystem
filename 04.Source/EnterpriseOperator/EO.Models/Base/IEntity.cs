@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EO.Business.Workflow
+namespace EO.Models.Base
 {
-    public interface IWorkflowBL
+    public interface IEntity
     {
-        string Get();
+        Guid Id { get; set; }
     }
 }

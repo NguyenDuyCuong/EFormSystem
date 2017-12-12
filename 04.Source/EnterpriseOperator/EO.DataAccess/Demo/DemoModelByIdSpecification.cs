@@ -1,24 +1,24 @@
 ﻿using EO.DataAccess.Base;
-using EO.Models;
+using EO.Models.Demo;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EO.DataAccess.Workflows
+namespace EO.DataAccess.Demo
 {
-    public class WorkflowByIdSpecification : ISpecification<Workflow>
+    public class DemoModelByIdSpecification : ISpecification
     {
         private Guid id;
-        private readonly string tableName = "Workflow";
+        private readonly string tableName = "Demo";
 
-        public WorkflowByIdSpecification(Guid Id)
+        public DemoModelByIdSpecification(Guid Id)
         {
             this.id = Id;
         }
 
         public string GetSqlQuery()
         {
-            return String.Format("SELECT * FROM %1$s WHERE `%2$s` = %3$d';",
+            return String.Format("SELECT 'CuongND'",
                 tableName,
                 "ID",
                 id

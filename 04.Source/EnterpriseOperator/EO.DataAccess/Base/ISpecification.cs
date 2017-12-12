@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EO.DataAccess.Base
 {
-    public interface ISpecification<T>
+    public interface ISpecification
     {
         String GetSqlQuery();
     }

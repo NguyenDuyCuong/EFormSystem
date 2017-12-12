@@ -8,7 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using EO.Business.Workflow;
+using EO.Business.Demo;
+using EO.Shared.Global;
 
 namespace EO.WFS.API
 {
@@ -26,7 +27,7 @@ namespace EO.WFS.API
         {
             services.AddMvc();
 
-            services.AddSingleton<IWorkflowBL, WorkflowBL>();
+            services.Configure<AppConfigures>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

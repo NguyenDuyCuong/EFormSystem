@@ -10,8 +10,4 @@
     <ProjectReference Include="..\EO.Shared\EO.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Base\" />
-  </ItemGroup>
-
 </Project>

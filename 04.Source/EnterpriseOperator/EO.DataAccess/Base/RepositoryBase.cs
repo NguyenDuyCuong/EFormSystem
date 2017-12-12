@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using EO.Models;
+using EO.Models.Base;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,14 @@ using System.Text;
 
 namespace EO.DataAccess.Base
 {
-    public abstract class RepositoryBase<T>
+    public abstract class RepositoryBase
     {
         public RepositoryBase(string stringConnection)
         {
             this.connectionString = stringConnection;
         }
 
-        public void Add(Workflow item)
+        public void Add(IEntity item)
         {
             using (var cn = Connection)
             {
@@ -27,15 +28,15 @@ namespace EO.DataAccess.Base
             }
         }
 
-        public List<Workflow> Query(ISpecification<Workflow> specification)
+        public List<T> Query<T>(ISpecification specification)
         {
-            var result = new List<Workflow>();
+            var result = new List<T>();
             using (var cn = Connection)
             {
                 cn.Open();
                 var ts = cn.BeginTransaction();
-
-                result = cn.Query<Workflow>(specification.GetSqlQuery()).AsList();
+                var tmp = cn.Query<T>(specification.GetSqlQuery());
+                result = tmp.AsList();
 
                 ts.Commit();
             }
@@ -43,17 +44,17 @@ namespace EO.DataAccess.Base
             return result;
         }
 
-        public void Remove(Workflow item)
+        public void Remove(IEntity item)
         {
             throw new NotImplementedException();
         }
 
-        public void Remove(ISpecification<Workflow> specification)
+        public void Remove(ISpecification specification)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Workflow item)
+        public void Update(IEntity item)
         {
             throw new NotImplementedException();
         }
